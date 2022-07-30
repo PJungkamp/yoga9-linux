@@ -61,7 +61,7 @@ I found a lot of useful information and patches in these threads:
 - [bass speakers](https://bugzilla.kernel.org/show_bug.cgi?id=208555)  
   Many thanks to all the people sharing their knowledge and readily
   testing my patch!
-- [brightness keys](https://bugzilla.kernel.org/show_bug.cgi?id=214899)
+- [brightness keys](https://bugzilla.kernel.org/show_bug.cgi?id=214899)  
   Many thanks to both the reporter with god-like ACPI debugging skills
   and the kernel developer spending his time on fixing the issue!
 
