@@ -54,3 +54,19 @@ Lenovo Vantage on Windows.
   (e.g. KDE Plasma & GNOME).
 - The ACPI can also control the keyboard backlight setting (Off/Low/High/Auto)
   but I have not written a patch for that yet.
+
+## Bug Reports
+
+I found a lot of useful information and patches in these threads:
+- [bass speakers](https://bugzilla.kernel.org/show_bug.cgi?id=208555)  
+  Many thanks to all the people sharing their knowledge and readily
+  testing my patch!
+- [brightness keys](https://bugzilla.kernel.org/show_bug.cgi?id=214899)
+  Many thanks to both the reporter with god-like ACPI debugging skills
+  and the kernel developer spending his time on fixing the issue!
+
+## Submitted Patches
+
+The bass speaker patch has been submitted to and was applied by the
+SOUND subsystem maintainer. The submission process was fast and
+uncomplicated!
