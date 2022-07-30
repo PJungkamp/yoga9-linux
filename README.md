@@ -70,3 +70,15 @@ I found a lot of useful information and patches in these threads:
 The bass speaker patch has been submitted to and was applied by the
 SOUND subsystem maintainer. The submission process was fast and
 uncomplicated!
+
+
+## License
+
+This repository contains patches, which are either derivative work targeting a
+specific already licensed source, i.e. parts of the Linux kernel, or introduce
+new parts to the Linux kernel. These patches fall thus, if not explicitly
+stated otherwise, under the license of the source they are targeting, or if
+they introduce new code, the license they explicitly specify inside of the
+patch. Please refer to the specific patch and source in question for further
+information. License texts can be obtained at
+https://github.com/torvalds/linux/tree/master/LICENSES.
