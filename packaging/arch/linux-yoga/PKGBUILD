@@ -22,8 +22,9 @@ source=(
   '0002-ACPICA-Make-address-space-handler-install-and-_REG-e.patch'
   '0003-ACPI-EC-fix-ECDT-probe-ordering-issues.patch'
   '0004-Add-IdeaPad-WMI-Fn-Keys-driver.patch'
-  '0005-Add-IdeaPad-quick_charge-attribute-to-sysfs.patch'
-  '0006-Add-IdeaPad-Usage-Mode-driver.patch'
+  '0005-Add-IdeaPad-Usage-Mode-driver.patch'
+  '0006-Add-IdeaPad-quick_charge-attribute-to-sysfs.patch'
+  '0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch'
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -33,12 +34,13 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '957b96241d74ee30ebbe07f7c74ad7480f9d617c9bbd3bc9b08d911e13ad2991'
-            'e5446f4e12db61158210d5ddfe976b6f830f6eb72d3b046183fb34988572e0b8'
-            '61918f5d32b597a74223934b867ed806ff1206a97f56d73b9f034f2bcad4dbd3'
-            'b8edcf5e8aac6725f96e42424cfb01ae677154d00aa90c2f3f8e631498e64af0'
-            'b6a21b9c98fcd0bb20ab90b0cb797bf9ea7cf4ff6e6831b4ba182cb361dcbe15'
-            'e4b32f343c257d2b839b26517400605ff3d272d427a7aa00e030c578a2c7093c'
-            'd721f8b91fb5a157e4e8d9a6943b0b647420cc5d38d476b651259d35d3ac04ff')
+            'f2ec03ff889d23ad3af512fbe83a856985e4bd45092f9239897d10c49ec16385'
+            '06cad2a429f2a694f55300a5153483f9883ae5cfb8f8223ed2821a944e6ea4a4'
+            '43e0a20d037015742373f19def6f31710dd35a8ee0e121a97c29b2a57080b801'
+            'c6f778d786fbdd3483c66d834321c788b2818828003862d5a2a12f4cbc1694e6'
+            'c9420129ecdbdfaf3b2006923763d1291f9031f26911219910593b33b621e18d'
+            'c5ade2a167b1337e5564e49f9bec135d40b30b2442174598c354d80580a0af4e'
+            '3e00356005c55f34c753bc7c6ee0eeae7ad6ba1675edf141f50e775125400972')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase

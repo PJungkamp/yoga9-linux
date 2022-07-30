@@ -1,7 +1,7 @@
 From 4bb027493a4be8912cc03c9711f7e03e447cd78c Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Mon, 13 Jun 2022 22:17:42 +0200
-Subject: [PATCH 1/6] ALSA: hda/realtek: Add quirk for Lenovo Yoga9 14IAP7
+Subject: [PATCH 1/7] ALSA: hda/realtek: Add quirk for Lenovo Yoga9 14IAP7
 
 The Lenovo Yoga 9 14IAP7 is set up similarly to the Thinkpad X1 7th and
 8th Gen. It also has the speakers attached to NID 0x14 and the bass

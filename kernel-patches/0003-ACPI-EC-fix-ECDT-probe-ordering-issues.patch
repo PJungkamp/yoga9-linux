@@ -1,7 +1,7 @@
 From 837a10d1d705f918e9886bac3e04a1672a4b795a Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Mon, 4 Jul 2022 11:38:10 +0200
-Subject: [PATCH 3/6] ACPI: EC: fix ECDT probe ordering issues
+Subject: [PATCH 3/7] ACPI: EC: fix ECDT probe ordering issues
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
