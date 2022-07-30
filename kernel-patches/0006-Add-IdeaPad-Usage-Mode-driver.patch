@@ -1,7 +1,7 @@
-From 10e4127e0c7217b9bd1211c83a963ca123be2b21 Mon Sep 17 00:00:00 2001
+From 4209348f45752e7efa7be8212518774807284c61 Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Sat, 30 Jul 2022 15:46:13 +0200
-Subject: [PATCH 5/6] Add IdeaPad Usage Mode driver
+Subject: [PATCH 6/6] Add IdeaPad Usage Mode driver
 
 The so called 'usage mode' reported by the firmware of the Lenovo Yoga
 line via ACPI WMI is mapped to a tablet mode switch input device.
@@ -50,7 +50,7 @@ index 5e9b678e48b9..b2b377afd1ab 100644
  obj-$(CONFIG_ACERHDF)		+= acerhdf.o
 diff --git a/drivers/platform/x86/ideapad-wmi-usage-mode.c b/drivers/platform/x86/ideapad-wmi-usage-mode.c
 new file mode 100644
-index 000000000000..7e4b6efe74d1
+index 000000000000..abe61b4776e9
 --- /dev/null
 +++ b/drivers/platform/x86/ideapad-wmi-usage-mode.c
 @@ -0,0 +1,279 @@
@@ -285,7 +285,7 @@ index 000000000000..7e4b6efe74d1
 +#define ideapad_wmi_resume 	NULL
 +#endif
 +
-+static SIMPLE_DEV_PM_OPS(ideappad_wmi_pm, ideapad_wmi_suspend, ideapad_wmi_resume);
++static SIMPLE_DEV_PM_OPS(ideapad_wmi_pm, ideapad_wmi_suspend, ideapad_wmi_resume);
 +
 +static DEFINE_MUTEX(ideapad_wmi_shared_mutex);
 +
