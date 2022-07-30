@@ -1,0 +1,19 @@
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("Lenovo SUPER Resolution Event"), guid("{95D1DF76-D6C0-4E16-9193-7B2A849F3DF2}")]
+class LENOVO_SR_EVENT : WMIEvent {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+  [WmiDataId(1), read, Description("Lenovo SUPER Resolution Type Event")] uint32 PostSystemStatus;
+};
+
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("LENOVO_SR_DATA class"), guid("{77E614ED-F19E-46D6-A613-A8669FEE1FF0}")]
+class LENOVO_SR_DATA {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+
+  [WmiMethodId(1), Implemented, Description("Super Resolution Type Data")] void GetDataValue([in, Description("Control type")] uint32 datatype, [out, Description("SUPER Resolution Data Value")] uint32 Data);
+  [WmiMethodId(2), Implemented, Description("Super Control sth. by Set-DataValue")] void StartECMonitor([in, Description("Control type")] uint32 datatype, [in, Description("Control value")] uint32 value, [out, Description("Control result")] uint32 ret);
+  [WmiMethodId(3), Implemented, Description("Super Control sth. by Set-DataValue")] void StopECMonitor([in, Description("Control type")] uint32 datatype, [in, Description("Control value")] uint32 value, [out, Description("Control result")] uint32 ret);
+  [WmiMethodId(4), Implemented, Description("Super Resolution Capability")] void GetCapability([in, Description("Control type")] uint32 datatype, [out, Description("SUPER Resolution Data Value")] uint32 Data);
+  [WmiMethodId(5), Implemented, Description("Super Resolution Reserved")] void Reserved1([in, Description("Parameter")] uint32 parameter, [out, Description("SUPER Resolution Data Value")] uint32 Data);
+  [WmiMethodId(6), Implemented, Description("Super Resolution Reserved function")] void Reserved2([in, Description("Parameter")] uint32 parameter, [out, Description("SUPER Resolution Data Value")] uint32 Data);
+};

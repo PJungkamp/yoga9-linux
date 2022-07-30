@@ -1,0 +1,12 @@
+77E614ED-F19E-46D6-A613-A8669FEE1FF0:
+	object_id: SR
+	instance_count: 1
+	flags: 0x2 ACPI_WMI_METHOD 
+05901221-D566-11D1-B2F0-00A0C9062910:
+	object_id: DF
+	instance_count: 1
+	flags: 0
+95D1DF76-D6C0-4E16-9193-7B2A849F3DF2:
+	notify_id: 0xD0
+	instance_count: 1
+	flags: 0x8 ACPI_WMI_EVENT 

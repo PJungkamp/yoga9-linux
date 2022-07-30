@@ -1,0 +1,12 @@
+09B0EE6E-C3FD-4243-8DA1-7911FF80BB8C:
+	object_id: AB
+	instance_count: 1
+	flags: 0x2 ACPI_WMI_METHOD 
+06129D99-6083-4164-81AD-F092F9D773A6:
+	notify_id: 0xD0
+	instance_count: 1
+	flags: 0x8 ACPI_WMI_EVENT 
+05901221-D566-11D1-B2F0-00A0C9062910:
+	object_id: BD
+	instance_count: 1
+	flags: 0

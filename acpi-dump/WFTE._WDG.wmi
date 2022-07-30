@@ -1,0 +1,8 @@
+1F13AB7F-6220-4210-8F8E-8BB5E71EE969:
+	object_id: TE
+	instance_count: 1
+	flags: 0x2 ACPI_WMI_METHOD 
+05901221-D566-11D1-B2F0-00A0C9062910:
+	object_id: CC
+	instance_count: 1
+	flags: 0

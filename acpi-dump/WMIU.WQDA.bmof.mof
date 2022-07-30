@@ -1,0 +1,14 @@
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("Lenovo Utility Key Press Event"), guid("{8fc0de0c-b4e4-43fd-b0f3-8871711c1294}")]
+class LENOVO_UTILITY_EVENT : WMIEvent {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+  [WmiDataId(1), read, Description("Lenovo Utility Press key Event")] uint32 PressTypeDataVal;
+};
+
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("LENOVO_UTILITY_DATA class"), guid("{ce6c0974-0407-4f50-88ba-4fc3b6559ad8}")]
+class LENOVO_UTILITY_DATA {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+
+  [WmiMethodId(1), Implemented, Description("Utility 3.1 function is Support or the function Version")] void GetIfSupportOrVersion([in, Description("Control type")] uint32 datatype, [out, Description("0 is not support 1,2,3...version")] uint32 Data);
+};

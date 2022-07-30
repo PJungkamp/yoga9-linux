@@ -1,0 +1,20 @@
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("Lenovo Yoga Mode Change Event"), guid("{06129D99-6083-4164-81AD-F092F9D773A6}")]
+class LENOVO_GSENSOR_EVENT : WMIEvent {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+  [WmiDataId(1), read, Description("Lenovo Yoga Mode Change Event")] uint32 ModeDataVal;
+};
+
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("LENOVO_GSENSOR_DATA class"), guid("{09B0EE6E-C3FD-4243-8DA1-7911FF80BB8C}")]
+class LENOVO_GSENSOR_DATA {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+
+  [WmiMethodId(1), Implemented, Description("Mode Data")] void GetUsageMode([out, Description("Mode Data")] uint32 Data);
+  [WmiMethodId(2), Implemented, Description("Get Xaxis Value")] void GetXaxisValue([out, Description("Get Xaxis Value")] uint32 Data);
+  [WmiMethodId(3), Implemented, Description("Get Yaxis Value")] void GetYaxisValue([out, Description("Get Yaxis Value")] uint32 Data);
+  [WmiMethodId(4), Implemented, Description("Get Zaxis Value")] void GetZaxisValue([out, Description("Get Zaxis Value")] uint32 Data);
+  [WmiMethodId(5), Implemented, Description("Base to Ground")] void GetAngle4Value([out, Description("Base to Ground")] uint32 Data);
+  [WmiMethodId(6), Implemented, Description("Screen to Ground")] void GetAngle5Value([out, Description("Screen to Ground")] uint32 Data);
+  [WmiMethodId(7), Implemented, Description("Screen to Base")] void GetAngle6Value([out, Description("Screen to Base")] uint32 Data);
+};

@@ -1,0 +1,7 @@
+[WMI, dynamic : ToInstance, provider("WmiProv"), Locale("MS\\0x409"), Description("power data class"), guid("{1F13AB7F-6220-4210-8F8E-8BB5E71EE969}")]
+class FIRE_TEST_EVENT {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+
+  [WmiMethodId(1), Implemented, Description("Debug : Fire event")] void FireEvent([in, Description("Data")] uint32 Data, [out, Description("return")] uint32 ret);
+};

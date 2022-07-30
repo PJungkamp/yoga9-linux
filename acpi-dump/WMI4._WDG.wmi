@@ -1,0 +1,8 @@
+C3A03776-51AC-49AA-AD0F-F2F7D62C3F3C:
+	object_id: AD
+	instance_count: 3
+	flags: 0x5 ACPI_WMI_EXPENSIVE ACPI_WMI_STRING 
+05901221-D566-11D1-B2F0-00A0C9062910:
+	object_id: BD
+	instance_count: 1
+	flags: 0

@@ -1,0 +1,25 @@
+[WMI, Dynamic, Provider("WmiProv"), Locale("MS\\0x409"), Description("LFC_DATA class"), guid("{777B54E3-DDDC-4B2C-8B88-68A26A8835D0}")]
+class LFC_DATA {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+
+  [WmiMethodId(1), Implemented, Description("GetVersion")] void GetVersion([out, Description("GetVersion")] uint32 Data);
+  [WmiMethodId(2), Implemented, Description("GetPlatformVersion")] void GetPlatformVersion([out, Description("GetPlatformVersion")] uint32 Data);
+  [WmiMethodId(3), Implemented, Description("GetFan1Speed")] void GetFan1Speed([out, Description("GetFan1Speed")] uint32 Data);
+  [WmiMethodId(4), Implemented, Description("SetFan1Speed")] void SetFan1Speed([in, Description("SetFan1Speed")] uint32 Data);
+  [WmiMethodId(5), Implemented, Description("GetFan2Speed")] void GetFan2Speed([out, Description("GetFan2Speed")] uint32 Data);
+  [WmiMethodId(6), Implemented, Description("SetFan2Speed")] void SetFan2Speed([in, Description("SetFan2Speed")] uint32 Data);
+  [WmiMethodId(7), Implemented, Description("GetPowerLimit1")] void GetPowerLimit1([out, Description("GetPowerLimit1")] uint32 Data);
+  [WmiMethodId(8), Implemented, Description("SetPowerLimit1")] void SetPowerLimit1([in, Description("SetPowerLimit1")] uint32 Data);
+  [WmiMethodId(9), Implemented, Description("GetPowerLimit2")] void GetPowerLimit2([out, Description("GetPowerLimit2")] uint32 Data);
+  [WmiMethodId(10), Implemented, Description("SetPowerLimit2")] void SetPowerLimit2([in, Description("SetPowerLimit2")] uint32 Data);
+  [WmiMethodId(11), Implemented, Description("GetCPUTemperature")] void GetCPUTemperature([out, Description("GetCPUTemperature")] uint32 Data);
+  [WmiMethodId(12), Implemented, Description("GetGPUTemperature")] void GetGPUTemperature([out, Description("GetGPUTemperature")] uint32 Data);
+  [WmiMethodId(13), Implemented, Description("GetNearCPUTemperature")] void GetNearCPUTemperature([out, Description("GetNearCPUTemperature")] uint32 Data);
+  [WmiMethodId(14), Implemented, Description("GetNearGPUTemperature")] void GetNearGPUTemperature([out, Description("GetNearGPUTemperature")] uint32 Data);
+  [WmiMethodId(15), Implemented, Description("GetChargerTemperature")] void GetChargerTemperature([out, Description("GetChargerTemperature")] uint32 Data);
+  [WmiMethodId(16), Implemented, Description("GetEnvironmentTemperature")] void GetEnvironmentTemperature([out, Description("GetEnvironmentTemperature")] uint32 Data);
+  [WmiMethodId(17), Implemented, Description("GetSSDTemperature")] void GetSSDTemperature([out, Description("GetSSDTemperature")] uint32 Data);
+  [WmiMethodId(18), Implemented, Description("GetRAMTemperature")] void GetRAMTemperature([out, Description("GetRAMTemperature")] uint32 Data);
+  [WmiMethodId(19), Implemented, Description("DisableDPTF")] void DisableDPTF([in, Description("DisableDPTF")] uint32 Data);
+};

@@ -1,0 +1,4 @@
+#!/bin/env bash
+
+modprobe acpi_call
+echo "$@" | tee /proc/acpi/call && cat /proc/acpi/call

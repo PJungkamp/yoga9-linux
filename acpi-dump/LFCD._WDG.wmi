@@ -1,0 +1,8 @@
+777B54E3-DDDC-4B2C-8B88-68A26A8835D0:
+	object_id: A0
+	instance_count: 1
+	flags: 0x2 ACPI_WMI_METHOD 
+05901221-D566-11D1-B2F0-00A0C9062910:
+	object_id: DE
+	instance_count: 1
+	flags: 0

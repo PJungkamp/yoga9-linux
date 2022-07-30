@@ -1,0 +1,10 @@
+[abstract]
+class Lenovo_SystemElement {
+};
+
+[WMI, Dynamic : ToInstance, Provider("WMIProv"), WmiExpense(1), Description("Lenovo System Information"), GUID("C3A03776-51AC-49AA-AD0F-F2F7D62C3F3C"), Locale("MS\\0x409")]
+class Lenovo_BatteryInformation : Lenovo_SystemElement {
+  [key, read] string InstanceName;
+  [read] boolean Active;
+  [WmiDataId(1), Description("Battery Information")] string CurrentSetting;
+};
