@@ -7,16 +7,19 @@ After some messing with the kernel I'm really happy with my device.
 
 ## Problems OOTB
 
-There were two obvious problems when first installing Linux on this device:
+There were some obvious problems when first installing Linux on this device:
 
 1.  The bass speakers don't work (only sound from the tinny tweeters)
 2.  Various function keys don't emit any input event's ('Lenovo Support',
     'Lenovo Favorite', 'Virtual Background', 'Sound Profile', 'Darkmode Toggle'
     and the brightness keys)
+3.  Wayland Desktop Environments experience show graphical artifacts on some
+    screen updates.
+4.  Hibernating the Laptop breaks the sound after resume.
 
 ## Solutions
 
-I found solutions for both of them:
+I found solutions for most of them:
 
 1.  The bass speakers:
     - [0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch](kernel-patches/0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch)
@@ -36,6 +39,15 @@ I found solutions for both of them:
       & [0003-ACPI-EC-fix-ECDT-probe-ordering-issues.patch](kernel-patches/0003-ACPI-EC-fix-ECDT-probe-ordering-issues.patch)  
         The brightness keys should be supported already but aren't due to a
         difference in ACPI initialization between Windows and Linux.
+3.  The graphical glitches seem to be related to Intel's PSR (Panel Self Refresh)
+    implementation. So I disabled it for now using [`/etc/modprobe.d/i915.conf`](config/etc/modprobe.d/i915.conf).
+    This may increase the idle power consumption, so I still hope for a more
+    proper solution.
+4.  The sound after hibernation is broken due to a bug in `snd_sof`. The
+    corresponding [issue](https://github.com/thesofproject/sof/issues/5908)
+    suggests using the `snd_sof.sof_debug=128` module option as in
+    [`/etc/modprobe.d/sof.conf`](config/etc/modprobe.d/sof.conf) until Linux
+    5.19 is released.
 
 ## Extra Features
 
@@ -67,10 +79,10 @@ I found a lot of useful information and patches in these threads:
 
 ## Submitted Patches
 
-The bass speaker patch has been submitted to and was applied by the
-SOUND subsystem maintainer. The submission process was fast and
-uncomplicated!
-
+The [0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch](kernel-patches/0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch)
+has been submitted to the alsa-devel mailing list and was applied to the
+subsystem maintainers git tree.
+See https://mailman.alsa-project.org/pipermail/alsa-devel/2022-July/204315.html
 
 ## License
 
