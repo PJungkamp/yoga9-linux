@@ -84,6 +84,19 @@ has been submitted to the alsa-devel mailing list and was applied to the
 subsystem maintainers git tree.
 See https://mailman.alsa-project.org/pipermail/alsa-devel/2022-July/204315.html
 
+## Other Devices
+
+The Lenovo Yoga 7 16IAP7 seems to use the same audio codec.
+[0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch](kernel-patches/0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch)
+adds a quirk to activate the fixup from
+[0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch](kernel-patches/0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch)
+on that device.
+
+If you think that the fixup may also work for your device, you can apply the
+patches yourself and add something like
+[`/etc/modprobe.d/snd.conf`](config/etc/modprobe.d/snd.conf)
+(without the comments) to the force the fixup on your hardware.
+
 ## License
 
 This repository contains patches, which are either derivative work targeting a
