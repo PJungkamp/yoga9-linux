@@ -1,0 +1,72 @@
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.2.auto
+	Serial Number:	 LUID:00730001011F0002
+	Sensor Model:	 LIS2DWL Sensor
+	Manufacturer:	 ST_MICRO
+	Friendly Name:	 LIS2DWL Accelerometer Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.3.auto
+	Serial Number:	 LUID:00730001011F0102
+	Sensor Model:	 LIS2DWL Sensor
+	Manufacturer:	 ST_MICRO
+	Friendly Name:	 LIS2DWL Accelerometer Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.4.auto
+	Serial Number:	 LUID:0041010200000082
+	Sensor Model:	 STK3X3X Sensor
+	Manufacturer:	 Vendor 258
+	Friendly Name:	 LIGHT_AMBIENTLIGHT Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.5.auto
+	Serial Number:	 LUID:9C40000173C00082
+	Sensor Model:	 VL53L1 Sensor
+	Manufacturer:	 ST_MICRO
+	Friendly Name:	 ST Photonic V137 Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.6.auto
+	Serial Number:	 LUID:0226000171AC0081
+	Sensor Model:	 VL53L1_HOD Sensor
+	Manufacturer:	 ST_MICRO
+	Friendly Name:	 ST VL53L1 HOD V1311 Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.7.auto
+	Serial Number:	 LUID:00E1001A270E0080
+	Sensor Model:	 LENOVO_ST_HUMANSENSE S
+	Manufacturer:	 LENOVO
+	Friendly Name:	 Lenovo ST HPD v201 Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-2000e1.8.auto
+	Serial Number:	 LUID:0302000000000080
+	Sensor Model:	 Model 
+	Manufacturer:	 INTEL
+	Friendly Name:	 Simple DMD Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-200001.1.auto
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-200073.9.auto
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-2000e1.11.auto
+	Serial Number:	 LUID:0073000000000001
+	Sensor Model:	 LIS2DWL Sensor
+	Manufacturer:	 ST_MICRO
+	Friendly Name:	 Calibrated Accelerometer Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-2000e1.13.auto
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-2000e1.14.auto
+	Serial Number:	 LUID:0300000000000000
+	Sensor Model:	 Model 
+	Manufacturer:	 INTEL
+	Friendly Name:	 Lid Mode Sensor
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-2000e1.15.auto
+	Serial Number:	 LUID:0309000000000080
+	Sensor Model:	 Dynamic KB Lighting
+	Manufacturer:	 INTEL
+	Friendly Name:	 Dynamic KB Lighting
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-20008f.12.auto
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-200001.10.auto
+
+Sensor: /sys/bus/ishtp/devices/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0004/HID-SENSOR-INT-020b
+
