@@ -23,7 +23,7 @@ I found solutions for most of them:
 
 1.  The bass speakers:
     - [0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch](kernel-patches/0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch)
-        1.  The ALC287 codex has the bass speakers connected to the Pin Complex
+        1.  The ALC287 HDA codec has the bass speakers connected to the Pin Complex
             on NID 0x17 which reports itself as unconnected.
         2.  The bass speaker amplifiers need to be enabled using an HDA verb
             sequence which has been extracted by sniffing the Windows drivers
