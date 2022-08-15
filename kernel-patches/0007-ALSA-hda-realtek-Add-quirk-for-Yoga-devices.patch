@@ -1,7 +1,7 @@
-From 9c2d577aa21184c420938c44f36bc61518939f69 Mon Sep 17 00:00:00 2001
+From 85136309b3efe5a54167cdfbb9f1a3abab116929 Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Sat, 30 Jul 2022 21:33:16 +0200
-Subject: [PATCH 7/7] ALSA: hda/realtek: Add quirk for Yoga devices
+Subject: [PATCH 7/9] ALSA: hda/realtek: Add quirk for Yoga devices
 
 The Lenovo Yoga 7 16IAP7 uses the same ALC287 codec setup as the
 Lenovo Yoga 9 14IAP7.

@@ -1,7 +1,7 @@
-From 7cb226e833fbaf45ba19cc23ebd7bda704a47caf Mon Sep 17 00:00:00 2001
+From 7a622d9869602cf5587cadf418f3eed48a39ab90 Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Sat, 30 Jul 2022 15:21:20 +0200
-Subject: [PATCH 4/7] Add IdeaPad WMI Fn Keys driver
+Subject: [PATCH 4/9] Add IdeaPad WMI Fn Keys driver
 
 Create an input device for WMI events corresponding to some special
 keys on the 'Lenovo Yoga' line.

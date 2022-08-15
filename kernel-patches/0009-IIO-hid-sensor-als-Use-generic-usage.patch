@@ -1,0 +1,99 @@
+From 130cbb895b609e511b5b12071bf93e8a4bd3a73d Mon Sep 17 00:00:00 2001
+From: Philipp Jungkamp <p.jungkamp@gmx.net>
+Date: Sat, 13 Aug 2022 19:21:27 +0200
+Subject: [PATCH 9/9] IIO: hid-sensor-als: Use generic usage
+
+Use a generic 'hsdev->usage' instead of the HID_USAGE_SENSOR_ALS this
+allows this driver to drive the Lenvo custom ambient light sensor,
+which is registered under a 'custom' usage and not HID_USAGE_SENSOR_ALS.
+
+Adds the Lenovo Intelligent Sensing Solution (LISS) ambient light sensor
+to the platform device ids.
+
+Signed-off-by: Philipp Jungkamp <p.jungkamp@gmx.net>
+---
+ drivers/iio/light/hid-sensor-als.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/iio/light/hid-sensor-als.c b/drivers/iio/light/hid-sensor-als.c
+index 5a1a625d8d16..244ee386b48b 100644
+--- a/drivers/iio/light/hid-sensor-als.c
++++ b/drivers/iio/light/hid-sensor-als.c
+@@ -86,6 +86,7 @@ static int als_read_raw(struct iio_dev *indio_dev,
+ 			      long mask)
+ {
+ 	struct als_state *als_state = iio_priv(indio_dev);
++	struct hid_sensor_hub_device *hsdev = als_state->common_attributes.hsdev;
+ 	int report_id = -1;
+ 	u32 address;
+ 	int ret_type;
+@@ -110,8 +111,8 @@ static int als_read_raw(struct iio_dev *indio_dev,
+ 			hid_sensor_power_state(&als_state->common_attributes,
+ 						true);
+ 			*val = sensor_hub_input_attr_get_raw_value(
+-					als_state->common_attributes.hsdev,
+-					HID_USAGE_SENSOR_ALS, address,
++					hsdev,
++					hsdev->usage, address,
+ 					report_id,
+ 					SENSOR_HUB_SYNC,
+ 					min < 0);
+@@ -260,7 +261,7 @@ static int als_parse_report(struct platform_device *pdev,
+ 			st->als_illum.report_id);
+ 
+ 	st->scale_precision = hid_sensor_format_scale(
+-				HID_USAGE_SENSOR_ALS,
++				usage_id,
+ 				&st->als_illum,
+ 				&st->scale_pre_decml, &st->scale_post_decml);
+ 
+@@ -285,7 +286,7 @@ static int hid_als_probe(struct platform_device *pdev)
+ 	als_state->common_attributes.hsdev = hsdev;
+ 	als_state->common_attributes.pdev = pdev;
+ 
+-	ret = hid_sensor_parse_common_attributes(hsdev, HID_USAGE_SENSOR_ALS,
++	ret = hid_sensor_parse_common_attributes(hsdev, hsdev->usage,
+ 					&als_state->common_attributes,
+ 					als_sensitivity_addresses,
+ 					ARRAY_SIZE(als_sensitivity_addresses));
+@@ -303,7 +304,7 @@ static int hid_als_probe(struct platform_device *pdev)
+ 
+ 	ret = als_parse_report(pdev, hsdev,
+ 			       (struct iio_chan_spec *)indio_dev->channels,
+-			       HID_USAGE_SENSOR_ALS, als_state);
++			       hsdev->usage, als_state);
+ 	if (ret) {
+ 		dev_err(&pdev->dev, "failed to setup attributes\n");
+ 		return ret;
+@@ -333,7 +334,7 @@ static int hid_als_probe(struct platform_device *pdev)
+ 	als_state->callbacks.send_event = als_proc_event;
+ 	als_state->callbacks.capture_sample = als_capture_sample;
+ 	als_state->callbacks.pdev = pdev;
+-	ret = sensor_hub_register_callback(hsdev, HID_USAGE_SENSOR_ALS,
++	ret = sensor_hub_register_callback(hsdev, hsdev->usage,
+ 					&als_state->callbacks);
+ 	if (ret < 0) {
+ 		dev_err(&pdev->dev, "callback reg failed\n");
+@@ -356,7 +357,7 @@ static int hid_als_remove(struct platform_device *pdev)
+ 	struct iio_dev *indio_dev = platform_get_drvdata(pdev);
+ 	struct als_state *als_state = iio_priv(indio_dev);
+ 
+-	sensor_hub_remove_callback(hsdev, HID_USAGE_SENSOR_ALS);
++	sensor_hub_remove_callback(hsdev, hsdev->usage);
+ 	iio_device_unregister(indio_dev);
+ 	hid_sensor_remove_trigger(indio_dev, &als_state->common_attributes);
+ 
+@@ -368,6 +369,10 @@ static const struct platform_device_id hid_als_ids[] = {
+ 		/* Format: HID-SENSOR-usage_id_in_hex_lowercase */
+ 		.name = "HID-SENSOR-200041",
+ 	},
++	{
++		/* Format: HID-SENSOR-custom_sensor_tag-usage_id_in_hex_lowercase */
++		.name = "HID-SENSOR-LISS-0041",
++	},
+ 	{ /* sentinel */ }
+ };
+ MODULE_DEVICE_TABLE(platform, hid_als_ids);
+-- 
+2.37.1
+

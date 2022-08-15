@@ -1,7 +1,7 @@
-From 5f6aeaa52619a6b5a1948cda8e381ecf930f6845 Mon Sep 17 00:00:00 2001
+From e3f898d7818e5941a5150e8e6a0f2bf682a79004 Mon Sep 17 00:00:00 2001
 From: Hans de Goede <hdegoede@redhat.com>
 Date: Wed, 15 Jun 2022 12:50:13 +0200
-Subject: [PATCH 2/7] ACPICA: Make address-space-handler install and _REG
+Subject: [PATCH 1/9] ACPICA: Make address-space-handler install and _REG
  execution 2 separate steps
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

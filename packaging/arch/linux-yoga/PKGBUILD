@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-yoga
-pkgver=5.18.14.arch1
+pkgver=5.19.1.arch2
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -18,13 +18,15 @@ _srcname=archlinux-linux
 source=(
   "$_srcname::git+https://github.com/archlinux/linux?signed#tag=$_srctag"
   config         # the main kernel config file
-  '0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch'
-  '0002-ACPICA-Make-address-space-handler-install-and-_REG-e.patch'
-  '0003-ACPI-EC-fix-ECDT-probe-ordering-issues.patch'
-  '0004-Add-IdeaPad-WMI-Fn-Keys-driver.patch'
-  '0005-Add-IdeaPad-Usage-Mode-driver.patch'
-  '0006-Add-IdeaPad-quick_charge-attribute-to-sysfs.patch'
-  '0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch'
+  0001-ACPICA-Make-address-space-handler-install-and-_REG-e.patch
+  0002-ACPI-EC-fix-ECDT-probe-ordering-issues.patch
+  0003-Add-IdeaPad-quick_charge-attribute-to-sysfs.patch
+  0004-Add-IdeaPad-WMI-Fn-Keys-driver.patch
+  0005-Add-IdeaPad-Usage-Mode-driver.patch
+  0006-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch
+  0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch
+  0008-HID-hid-sensor-custom-More-custom-iio-sensors.patch
+  0009-IIO-hid-sensor-als-Use-generic-usage.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -33,14 +35,16 @@ validpgpkeys=(
   'C7E7849466FE2358343588377258734B41C31549'  # David Runge <dvzrv@archlinux.org>
 )
 sha256sums=('SKIP'
-            '957b96241d74ee30ebbe07f7c74ad7480f9d617c9bbd3bc9b08d911e13ad2991'
-            'f2ec03ff889d23ad3af512fbe83a856985e4bd45092f9239897d10c49ec16385'
-            '06cad2a429f2a694f55300a5153483f9883ae5cfb8f8223ed2821a944e6ea4a4'
-            '43e0a20d037015742373f19def6f31710dd35a8ee0e121a97c29b2a57080b801'
-            'c6f778d786fbdd3483c66d834321c788b2818828003862d5a2a12f4cbc1694e6'
-            'c9420129ecdbdfaf3b2006923763d1291f9031f26911219910593b33b621e18d'
-            'c5ade2a167b1337e5564e49f9bec135d40b30b2442174598c354d80580a0af4e'
-            '3e00356005c55f34c753bc7c6ee0eeae7ad6ba1675edf141f50e775125400972')
+            '2ef7523c294df85c64c3077cb0512e20140671acc16f24b774e3f7693fcd989f'
+            'b3cd2b1cb7dd0c080f2f06ddd6e7a9f4725c4ffecb3d22bb8f494b35b964bf6b'
+            '1635279d934394b9f76b3b19f754b1ad72311c7739f4841521c233ad153677ff'
+            '817e763de31de403a625ad6f5dc872383c037af20e4ebc66beb27e4516d82794'
+            'f28a48ec39fee2afb66a9fa79d8dbefaa8ec1e25293ce1a90b5db70591ab5fff'
+            'b4622a0a06dbfcd53555ed0fe259a79bcf79fbcbfad60c9a384d312b21ed5d6c'
+            'c26c34119c082fcbb20c520e89048f2ea741c0e523b6ae6640afa185371269dc'
+            'af2dbe6f85b0ae63be3711ebbb6ab720ccd7c1e1e68ceaf99f21d7ef73015863'
+            'd1b2c9c17b0c193d3df1184d0f7fc850daf9e3d84d1d34385c8a9ee10a6ae17c'
+            '7ff6d9c2da686f3331c117d2f06f6aa9f37be5ac95eb781b54491e0ece517a8a')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase

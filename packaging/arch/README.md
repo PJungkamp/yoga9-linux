@@ -6,15 +6,17 @@ I use for a patched kernel.
 
 ## Kernel `config`
 
-I have not reduced my config yet. The included kernel [`config`](linux-yoga/config)
-is pretty much the default Arch Linux config.
+I have reduced my `config`. The included kernel [`config`](linux-yoga/config)
+does only include the kernel modules I use myself.
 
-If you already run a reduced config you can use that one and add
+If you already run a reduced `config` you can use that one and add
 ```
 CONFIG_IDEAPAD_WMI_FN_KEYS=m
 CONFIG_IDEAPAD_WMI_USAGE_MODE=m
 ```
 to enable the two WMI drivers in the patches.
+
+If you want to try this package on another device you may need to use the default arch `config`.
 
 ## Building `linux-yoga`
 

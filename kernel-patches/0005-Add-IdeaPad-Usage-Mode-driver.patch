@@ -1,7 +1,7 @@
-From 4209348f45752e7efa7be8212518774807284c61 Mon Sep 17 00:00:00 2001
+From 20d98289a006ae8548307cb18ab0998970b9d83d Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Sat, 30 Jul 2022 15:46:13 +0200
-Subject: [PATCH 5/7] Add IdeaPad Usage Mode driver
+Subject: [PATCH 5/9] Add IdeaPad Usage Mode driver
 
 The so called 'usage mode' reported by the firmware of the Lenovo Yoga
 line via ACPI WMI is mapped to a tablet mode switch input device.
