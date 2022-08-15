@@ -1,0 +1,1563 @@
+0x05, 0x20,                    // Usage Page (Sensor)                 0
+0x09, 0x01,                    // Usage (Sensor)                      2
+0xa1, 0x00,                    // Collection (Physical)               4
+0x85, 0x01,                    //  Report ID (1)                      6
+0x05, 0x20,                    //  Usage Page (Sensor)                8
+0x09, 0xe1,                    //  Usage (Other: Custom)              10
+0xa1, 0x00,                    //  Collection (Physical)              12
+0x05, 0x20,                    //   Usage Page (Sensor)               14
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 16
+0x15, 0x01,                    //   Logical Minimum (1)               19
+0x25, 0x03,                    //   Logical Maximum (3)               21
+0x75, 0x08,                    //   Report Size (8)                   23
+0x95, 0x01,                    //   Report Count (1)                  25
+0xa1, 0x02,                    //   Collection (Logical)              27
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 29
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 32
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 35
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           38
+0xc0,                          //   End Collection                    40
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       41
+0x15, 0x01,                    //   Logical Minimum (1)               44
+0x25, 0x07,                    //   Logical Maximum (7)               46
+0x75, 0x08,                    //   Report Size (8)                   48
+0x95, 0x01,                    //   Report Count (1)                  50
+0xa1, 0x02,                    //   Collection (Logical)              52
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  54
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      57
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 60
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 63
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 66
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 69
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      72
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           75
+0xc0,                          //   End Collection                    77
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 78
+0x15, 0x01,                    //   Logical Minimum (1)               81
+0x25, 0x03,                    //   Logical Maximum (3)               83
+0x75, 0x08,                    //   Report Size (8)                   85
+0x95, 0x01,                    //   Report Count (1)                  87
+0xa1, 0x02,                    //   Collection (Logical)              89
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 91
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 94
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 97
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           100
+0xc0,                          //   End Collection                    102
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     103
+0x15, 0x01,                    //   Logical Minimum (1)               106
+0x25, 0x06,                    //   Logical Maximum (6)               108
+0x75, 0x08,                    //   Report Size (8)                   110
+0x95, 0x01,                    //   Report Count (1)                  112
+0xa1, 0x02,                    //   Collection (Logical)              114
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   116
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 119
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 122
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 125
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 128
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 131
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           134
+0xc0,                          //   End Collection                    136
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 137
+0x15, 0x00,                    //   Logical Minimum (0)               140
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      142
+0x75, 0x20,                    //   Report Size (32)                  147
+0x95, 0x01,                    //   Report Count (1)                  149
+0x55, 0x00,                    //   Unit Exponent (0)                 151
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            153
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 155
+0x15, 0x00,                    //   Logical Minimum (0)               158
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      160
+0x75, 0x20,                    //   Report Size (32)                  165
+0x95, 0x01,                    //   Report Count (1)                  167
+0x55, 0x00,                    //   Unit Exponent (0)                 169
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            171
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 173
+0x75, 0x10,                    //   Report Size (16)                  176
+0x95, 0x07,                    //   Report Count (7)                  178
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            180
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 182
+0x75, 0x10,                    //   Report Size (16)                  185
+0x95, 0x16,                    //   Report Count (22)                 187
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            189
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    191
+0x75, 0x10,                    //   Report Size (16)                  194
+0x95, 0x17,                    //   Report Count (23)                 196
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            198
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 200
+0x75, 0x10,                    //   Report Size (16)                  203
+0x95, 0x10,                    //   Report Count (16)                 205
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            207
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   209
+0x75, 0x10,                    //   Report Size (16)                  212
+0x95, 0x20,                    //   Report Count (32)                 214
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            216
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 218
+0x15, 0x00,                    //   Logical Minimum (0)               221
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      223
+0x75, 0x20,                    //   Report Size (32)                  228
+0x95, 0x01,                    //   Report Count (1)                  230
+0x55, 0x00,                    //   Unit Exponent (0)                 232
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            234
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  236
+0x15, 0x00,                    //   Logical Minimum (0)               239
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      241
+0x75, 0x20,                    //   Report Size (32)                  246
+0x95, 0x01,                    //   Report Count (1)                  248
+0x55, 0x00,                    //   Unit Exponent (0)                 250
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            252
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 254
+0x75, 0x10,                    //   Report Size (16)                  257
+0x95, 0x20,                    //   Report Count (32)                 259
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            261
+0x0a, 0x44, 0x15,              //   Usage (Unknown Usage 0x1544)      263
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               266
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      271
+0x75, 0x20,                    //   Report Size (32)                  276
+0x95, 0x01,                    //   Report Count (1)                  278
+0x55, 0x0a,                    //   Unit Exponent (-6)                280
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            282
+0x05, 0x20,                    //   Usage Page (Sensor)               284
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       286
+0x15, 0x01,                    //   Logical Minimum (1)               289
+0x25, 0x07,                    //   Logical Maximum (7)               291
+0x75, 0x08,                    //   Report Size (8)                   293
+0x95, 0x01,                    //   Report Count (1)                  295
+0xa1, 0x02,                    //   Collection (Logical)              297
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  299
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      302
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 305
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 308
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 311
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 314
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      317
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             320
+0xc0,                          //   End Collection                    322
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       323
+0x15, 0x01,                    //   Logical Minimum (1)               326
+0x25, 0x06,                    //   Logical Maximum (6)               328
+0x75, 0x08,                    //   Report Size (8)                   330
+0x95, 0x01,                    //   Report Count (1)                  332
+0xa1, 0x02,                    //   Collection (Logical)              334
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    336
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 339
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 342
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 345
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 348
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 351
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             354
+0xc0,                          //   End Collection                    356
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 357
+0x75, 0x20,                    //   Report Size (32)                  360
+0x95, 0x01,                    //   Report Count (1)                  362
+0x55, 0x00,                    //   Unit Exponent (0)                 364
+0x81, 0x02,                    //   Input (Data,Var,Abs)              366
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 368
+0x75, 0x20,                    //   Report Size (32)                  371
+0x95, 0x01,                    //   Report Count (1)                  373
+0x55, 0x00,                    //   Unit Exponent (0)                 375
+0x81, 0x02,                    //   Input (Data,Var,Abs)              377
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     379
+0x75, 0x20,                    //   Report Size (32)                  382
+0x95, 0x02,                    //   Report Count (2)                  384
+0x55, 0x09,                    //   Unit Exponent (-7)                386
+0x81, 0x02,                    //   Input (Data,Var,Abs)              388
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 390
+0x75, 0x20,                    //   Report Size (32)                  393
+0x95, 0x02,                    //   Report Count (2)                  395
+0x55, 0x06,                    //   Unit Exponent (6)                 397
+0x81, 0x02,                    //   Input (Data,Var,Abs)              399
+0x0a, 0x44, 0x05,              //   Usage (Data Field: Custom Value 1) 401
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     404
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      409
+0x75, 0x20,                    //   Report Size (32)                  414
+0x95, 0x01,                    //   Report Count (1)                  416
+0x55, 0x0a,                    //   Unit Exponent (-6)                418
+0x81, 0x02,                    //   Input (Data,Var,Abs)              420
+0x0a, 0x45, 0x05,              //   Usage (Data Field: Custom Value 2) 422
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     425
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      430
+0x75, 0x20,                    //   Report Size (32)                  435
+0x95, 0x01,                    //   Report Count (1)                  437
+0x55, 0x0a,                    //   Unit Exponent (-6)                439
+0x81, 0x02,                    //   Input (Data,Var,Abs)              441
+0x0a, 0x46, 0x05,              //   Usage (Data Field: Custom Value 3) 443
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     446
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      451
+0x75, 0x20,                    //   Report Size (32)                  456
+0x95, 0x01,                    //   Report Count (1)                  458
+0x55, 0x0a,                    //   Unit Exponent (-6)                460
+0x81, 0x02,                    //   Input (Data,Var,Abs)              462
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  464
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               467
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           470
+0x75, 0x10,                    //   Report Size (16)                  473
+0x95, 0x01,                    //   Report Count (1)                  475
+0x55, 0x00,                    //   Unit Exponent (0)                 477
+0x81, 0x02,                    //   Input (Data,Var,Abs)              479
+0xc0,                          //  End Collection                     481
+0x85, 0x02,                    //  Report ID (2)                      482
+0x05, 0x20,                    //  Usage Page (Sensor)                484
+0x09, 0xe1,                    //  Usage (Other: Custom)              486
+0xa1, 0x00,                    //  Collection (Physical)              488
+0x05, 0x20,                    //   Usage Page (Sensor)               490
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 492
+0x15, 0x01,                    //   Logical Minimum (1)               495
+0x25, 0x03,                    //   Logical Maximum (3)               497
+0x75, 0x08,                    //   Report Size (8)                   499
+0x95, 0x01,                    //   Report Count (1)                  501
+0xa1, 0x02,                    //   Collection (Logical)              503
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 505
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 508
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 511
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           514
+0xc0,                          //   End Collection                    516
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       517
+0x15, 0x01,                    //   Logical Minimum (1)               520
+0x25, 0x07,                    //   Logical Maximum (7)               522
+0x75, 0x08,                    //   Report Size (8)                   524
+0x95, 0x01,                    //   Report Count (1)                  526
+0xa1, 0x02,                    //   Collection (Logical)              528
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  530
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      533
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 536
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 539
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 542
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 545
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      548
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           551
+0xc0,                          //   End Collection                    553
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 554
+0x15, 0x01,                    //   Logical Minimum (1)               557
+0x25, 0x03,                    //   Logical Maximum (3)               559
+0x75, 0x08,                    //   Report Size (8)                   561
+0x95, 0x01,                    //   Report Count (1)                  563
+0xa1, 0x02,                    //   Collection (Logical)              565
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 567
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 570
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 573
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           576
+0xc0,                          //   End Collection                    578
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     579
+0x15, 0x01,                    //   Logical Minimum (1)               582
+0x25, 0x06,                    //   Logical Maximum (6)               584
+0x75, 0x08,                    //   Report Size (8)                   586
+0x95, 0x01,                    //   Report Count (1)                  588
+0xa1, 0x02,                    //   Collection (Logical)              590
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   592
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 595
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 598
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 601
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 604
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 607
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           610
+0xc0,                          //   End Collection                    612
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 613
+0x15, 0x00,                    //   Logical Minimum (0)               616
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      618
+0x75, 0x20,                    //   Report Size (32)                  623
+0x95, 0x01,                    //   Report Count (1)                  625
+0x55, 0x00,                    //   Unit Exponent (0)                 627
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            629
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 631
+0x15, 0x00,                    //   Logical Minimum (0)               634
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      636
+0x75, 0x20,                    //   Report Size (32)                  641
+0x95, 0x01,                    //   Report Count (1)                  643
+0x55, 0x00,                    //   Unit Exponent (0)                 645
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            647
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 649
+0x75, 0x10,                    //   Report Size (16)                  652
+0x95, 0x07,                    //   Report Count (7)                  654
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            656
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 658
+0x75, 0x10,                    //   Report Size (16)                  661
+0x95, 0x16,                    //   Report Count (22)                 663
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            665
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    667
+0x75, 0x10,                    //   Report Size (16)                  670
+0x95, 0x17,                    //   Report Count (23)                 672
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            674
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 676
+0x75, 0x10,                    //   Report Size (16)                  679
+0x95, 0x10,                    //   Report Count (16)                 681
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            683
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   685
+0x75, 0x10,                    //   Report Size (16)                  688
+0x95, 0x20,                    //   Report Count (32)                 690
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            692
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 694
+0x15, 0x00,                    //   Logical Minimum (0)               697
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      699
+0x75, 0x20,                    //   Report Size (32)                  704
+0x95, 0x01,                    //   Report Count (1)                  706
+0x55, 0x00,                    //   Unit Exponent (0)                 708
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            710
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  712
+0x15, 0x00,                    //   Logical Minimum (0)               715
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      717
+0x75, 0x20,                    //   Report Size (32)                  722
+0x95, 0x01,                    //   Report Count (1)                  724
+0x55, 0x00,                    //   Unit Exponent (0)                 726
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            728
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 730
+0x75, 0x10,                    //   Report Size (16)                  733
+0x95, 0x20,                    //   Report Count (32)                 735
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            737
+0x0a, 0x44, 0x15,              //   Usage (Unknown Usage 0x1544)      739
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               742
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      747
+0x75, 0x20,                    //   Report Size (32)                  752
+0x95, 0x01,                    //   Report Count (1)                  754
+0x55, 0x0a,                    //   Unit Exponent (-6)                756
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            758
+0x05, 0x20,                    //   Usage Page (Sensor)               760
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       762
+0x15, 0x01,                    //   Logical Minimum (1)               765
+0x25, 0x07,                    //   Logical Maximum (7)               767
+0x75, 0x08,                    //   Report Size (8)                   769
+0x95, 0x01,                    //   Report Count (1)                  771
+0xa1, 0x02,                    //   Collection (Logical)              773
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  775
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      778
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 781
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 784
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 787
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 790
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      793
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             796
+0xc0,                          //   End Collection                    798
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       799
+0x15, 0x01,                    //   Logical Minimum (1)               802
+0x25, 0x06,                    //   Logical Maximum (6)               804
+0x75, 0x08,                    //   Report Size (8)                   806
+0x95, 0x01,                    //   Report Count (1)                  808
+0xa1, 0x02,                    //   Collection (Logical)              810
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    812
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 815
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 818
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 821
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 824
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 827
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             830
+0xc0,                          //   End Collection                    832
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 833
+0x75, 0x20,                    //   Report Size (32)                  836
+0x95, 0x01,                    //   Report Count (1)                  838
+0x55, 0x00,                    //   Unit Exponent (0)                 840
+0x81, 0x02,                    //   Input (Data,Var,Abs)              842
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 844
+0x75, 0x20,                    //   Report Size (32)                  847
+0x95, 0x01,                    //   Report Count (1)                  849
+0x55, 0x00,                    //   Unit Exponent (0)                 851
+0x81, 0x02,                    //   Input (Data,Var,Abs)              853
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     855
+0x75, 0x20,                    //   Report Size (32)                  858
+0x95, 0x02,                    //   Report Count (2)                  860
+0x55, 0x09,                    //   Unit Exponent (-7)                862
+0x81, 0x02,                    //   Input (Data,Var,Abs)              864
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 866
+0x75, 0x20,                    //   Report Size (32)                  869
+0x95, 0x02,                    //   Report Count (2)                  871
+0x55, 0x06,                    //   Unit Exponent (6)                 873
+0x81, 0x02,                    //   Input (Data,Var,Abs)              875
+0x0a, 0x44, 0x05,              //   Usage (Data Field: Custom Value 1) 877
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     880
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      885
+0x75, 0x20,                    //   Report Size (32)                  890
+0x95, 0x01,                    //   Report Count (1)                  892
+0x55, 0x0a,                    //   Unit Exponent (-6)                894
+0x81, 0x02,                    //   Input (Data,Var,Abs)              896
+0x0a, 0x45, 0x05,              //   Usage (Data Field: Custom Value 2) 898
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     901
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      906
+0x75, 0x20,                    //   Report Size (32)                  911
+0x95, 0x01,                    //   Report Count (1)                  913
+0x55, 0x0a,                    //   Unit Exponent (-6)                915
+0x81, 0x02,                    //   Input (Data,Var,Abs)              917
+0x0a, 0x46, 0x05,              //   Usage (Data Field: Custom Value 3) 919
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     922
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      927
+0x75, 0x20,                    //   Report Size (32)                  932
+0x95, 0x01,                    //   Report Count (1)                  934
+0x55, 0x0a,                    //   Unit Exponent (-6)                936
+0x81, 0x02,                    //   Input (Data,Var,Abs)              938
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  940
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               943
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           946
+0x75, 0x10,                    //   Report Size (16)                  949
+0x95, 0x01,                    //   Report Count (1)                  951
+0x55, 0x00,                    //   Unit Exponent (0)                 953
+0x81, 0x02,                    //   Input (Data,Var,Abs)              955
+0xc0,                          //  End Collection                     957
+0x85, 0x03,                    //  Report ID (3)                      958
+0x05, 0x20,                    //  Usage Page (Sensor)                960
+0x09, 0xe1,                    //  Usage (Other: Custom)              962
+0xa1, 0x00,                    //  Collection (Physical)              964
+0x05, 0x20,                    //   Usage Page (Sensor)               966
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 968
+0x15, 0x01,                    //   Logical Minimum (1)               971
+0x25, 0x03,                    //   Logical Maximum (3)               973
+0x75, 0x08,                    //   Report Size (8)                   975
+0x95, 0x01,                    //   Report Count (1)                  977
+0xa1, 0x02,                    //   Collection (Logical)              979
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 981
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 984
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 987
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           990
+0xc0,                          //   End Collection                    992
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       993
+0x15, 0x01,                    //   Logical Minimum (1)               996
+0x25, 0x07,                    //   Logical Maximum (7)               998
+0x75, 0x08,                    //   Report Size (8)                   1000
+0x95, 0x01,                    //   Report Count (1)                  1002
+0xa1, 0x02,                    //   Collection (Logical)              1004
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  1006
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      1009
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 1012
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 1015
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 1018
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 1021
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      1024
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1027
+0xc0,                          //   End Collection                    1029
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 1030
+0x15, 0x01,                    //   Logical Minimum (1)               1033
+0x25, 0x03,                    //   Logical Maximum (3)               1035
+0x75, 0x08,                    //   Report Size (8)                   1037
+0x95, 0x01,                    //   Report Count (1)                  1039
+0xa1, 0x02,                    //   Collection (Logical)              1041
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 1043
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 1046
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 1049
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1052
+0xc0,                          //   End Collection                    1054
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     1055
+0x15, 0x01,                    //   Logical Minimum (1)               1058
+0x25, 0x06,                    //   Logical Maximum (6)               1060
+0x75, 0x08,                    //   Report Size (8)                   1062
+0x95, 0x01,                    //   Report Count (1)                  1064
+0xa1, 0x02,                    //   Collection (Logical)              1066
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   1068
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 1071
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 1074
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 1077
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 1080
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 1083
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1086
+0xc0,                          //   End Collection                    1088
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 1089
+0x15, 0x00,                    //   Logical Minimum (0)               1092
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1094
+0x75, 0x20,                    //   Report Size (32)                  1099
+0x95, 0x01,                    //   Report Count (1)                  1101
+0x55, 0x00,                    //   Unit Exponent (0)                 1103
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1105
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 1107
+0x15, 0x00,                    //   Logical Minimum (0)               1110
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1112
+0x75, 0x20,                    //   Report Size (32)                  1117
+0x95, 0x01,                    //   Report Count (1)                  1119
+0x55, 0x00,                    //   Unit Exponent (0)                 1121
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1123
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 1125
+0x75, 0x10,                    //   Report Size (16)                  1128
+0x95, 0x07,                    //   Report Count (7)                  1130
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1132
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 1134
+0x75, 0x10,                    //   Report Size (16)                  1137
+0x95, 0x16,                    //   Report Count (22)                 1139
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1141
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    1143
+0x75, 0x10,                    //   Report Size (16)                  1146
+0x95, 0x17,                    //   Report Count (23)                 1148
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1150
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 1152
+0x75, 0x10,                    //   Report Size (16)                  1155
+0x95, 0x10,                    //   Report Count (16)                 1157
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1159
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   1161
+0x75, 0x10,                    //   Report Size (16)                  1164
+0x95, 0x20,                    //   Report Count (32)                 1166
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1168
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 1170
+0x15, 0x00,                    //   Logical Minimum (0)               1173
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1175
+0x75, 0x20,                    //   Report Size (32)                  1180
+0x95, 0x01,                    //   Report Count (1)                  1182
+0x55, 0x00,                    //   Unit Exponent (0)                 1184
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1186
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  1188
+0x15, 0x00,                    //   Logical Minimum (0)               1191
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1193
+0x75, 0x20,                    //   Report Size (32)                  1198
+0x95, 0x01,                    //   Report Count (1)                  1200
+0x55, 0x00,                    //   Unit Exponent (0)                 1202
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1204
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 1206
+0x75, 0x10,                    //   Report Size (16)                  1209
+0x95, 0x20,                    //   Report Count (32)                 1211
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1213
+0x0a, 0xd1, 0xe4,              //   Usage (Unknown Usage 0xe4d1)      1215
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               1218
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1223
+0x75, 0x20,                    //   Report Size (32)                  1228
+0x95, 0x01,                    //   Report Count (1)                  1230
+0x55, 0x0e,                    //   Unit Exponent (-2)                1232
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1234
+0x05, 0x20,                    //   Usage Page (Sensor)               1236
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       1238
+0x15, 0x01,                    //   Logical Minimum (1)               1241
+0x25, 0x07,                    //   Logical Maximum (7)               1243
+0x75, 0x08,                    //   Report Size (8)                   1245
+0x95, 0x01,                    //   Report Count (1)                  1247
+0xa1, 0x02,                    //   Collection (Logical)              1249
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  1251
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      1254
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 1257
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 1260
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 1263
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 1266
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      1269
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             1272
+0xc0,                          //   End Collection                    1274
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       1275
+0x15, 0x01,                    //   Logical Minimum (1)               1278
+0x25, 0x06,                    //   Logical Maximum (6)               1280
+0x75, 0x08,                    //   Report Size (8)                   1282
+0x95, 0x01,                    //   Report Count (1)                  1284
+0xa1, 0x02,                    //   Collection (Logical)              1286
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    1288
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 1291
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 1294
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 1297
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 1300
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 1303
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             1306
+0xc0,                          //   End Collection                    1308
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 1309
+0x75, 0x20,                    //   Report Size (32)                  1312
+0x95, 0x01,                    //   Report Count (1)                  1314
+0x55, 0x00,                    //   Unit Exponent (0)                 1316
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1318
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 1320
+0x75, 0x20,                    //   Report Size (32)                  1323
+0x95, 0x01,                    //   Report Count (1)                  1325
+0x55, 0x00,                    //   Unit Exponent (0)                 1327
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1329
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     1331
+0x75, 0x20,                    //   Report Size (32)                  1334
+0x95, 0x02,                    //   Report Count (2)                  1336
+0x55, 0x09,                    //   Unit Exponent (-7)                1338
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1340
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 1342
+0x75, 0x20,                    //   Report Size (32)                  1345
+0x95, 0x02,                    //   Report Count (2)                  1347
+0x55, 0x06,                    //   Unit Exponent (6)                 1349
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1351
+0x0a, 0xd1, 0x04,              //   Usage (Data Field: Illuminance)   1353
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               1356
+0x27, 0x10, 0x27, 0x00, 0x00,  //   Logical Maximum (10000)           1361
+0x75, 0x20,                    //   Report Size (32)                  1366
+0x95, 0x01,                    //   Report Count (1)                  1368
+0x55, 0x0d,                    //   Unit Exponent (-3)                1370
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1372
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  1374
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               1377
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           1380
+0x75, 0x10,                    //   Report Size (16)                  1383
+0x95, 0x01,                    //   Report Count (1)                  1385
+0x55, 0x00,                    //   Unit Exponent (0)                 1387
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1389
+0xc0,                          //  End Collection                     1391
+0x85, 0x04,                    //  Report ID (4)                      1392
+0x05, 0x20,                    //  Usage Page (Sensor)                1394
+0x09, 0xe1,                    //  Usage (Other: Custom)              1396
+0xa1, 0x00,                    //  Collection (Physical)              1398
+0x05, 0x20,                    //   Usage Page (Sensor)               1400
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 1402
+0x15, 0x01,                    //   Logical Minimum (1)               1405
+0x25, 0x03,                    //   Logical Maximum (3)               1407
+0x75, 0x08,                    //   Report Size (8)                   1409
+0x95, 0x01,                    //   Report Count (1)                  1411
+0xa1, 0x02,                    //   Collection (Logical)              1413
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 1415
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 1418
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 1421
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1424
+0xc0,                          //   End Collection                    1426
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       1427
+0x15, 0x01,                    //   Logical Minimum (1)               1430
+0x25, 0x07,                    //   Logical Maximum (7)               1432
+0x75, 0x08,                    //   Report Size (8)                   1434
+0x95, 0x01,                    //   Report Count (1)                  1436
+0xa1, 0x02,                    //   Collection (Logical)              1438
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  1440
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      1443
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 1446
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 1449
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 1452
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 1455
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      1458
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1461
+0xc0,                          //   End Collection                    1463
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 1464
+0x15, 0x01,                    //   Logical Minimum (1)               1467
+0x25, 0x03,                    //   Logical Maximum (3)               1469
+0x75, 0x08,                    //   Report Size (8)                   1471
+0x95, 0x01,                    //   Report Count (1)                  1473
+0xa1, 0x02,                    //   Collection (Logical)              1475
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 1477
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 1480
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 1483
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1486
+0xc0,                          //   End Collection                    1488
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     1489
+0x15, 0x01,                    //   Logical Minimum (1)               1492
+0x25, 0x06,                    //   Logical Maximum (6)               1494
+0x75, 0x08,                    //   Report Size (8)                   1496
+0x95, 0x01,                    //   Report Count (1)                  1498
+0xa1, 0x02,                    //   Collection (Logical)              1500
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   1502
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 1505
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 1508
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 1511
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 1514
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 1517
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1520
+0xc0,                          //   End Collection                    1522
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 1523
+0x15, 0x00,                    //   Logical Minimum (0)               1526
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1528
+0x75, 0x20,                    //   Report Size (32)                  1533
+0x95, 0x01,                    //   Report Count (1)                  1535
+0x55, 0x00,                    //   Unit Exponent (0)                 1537
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1539
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 1541
+0x15, 0x00,                    //   Logical Minimum (0)               1544
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1546
+0x75, 0x20,                    //   Report Size (32)                  1551
+0x95, 0x01,                    //   Report Count (1)                  1553
+0x55, 0x00,                    //   Unit Exponent (0)                 1555
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1557
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 1559
+0x75, 0x10,                    //   Report Size (16)                  1562
+0x95, 0x07,                    //   Report Count (7)                  1564
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1566
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 1568
+0x75, 0x10,                    //   Report Size (16)                  1571
+0x95, 0x16,                    //   Report Count (22)                 1573
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1575
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    1577
+0x75, 0x10,                    //   Report Size (16)                  1580
+0x95, 0x17,                    //   Report Count (23)                 1582
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1584
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 1586
+0x75, 0x10,                    //   Report Size (16)                  1589
+0x95, 0x10,                    //   Report Count (16)                 1591
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1593
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   1595
+0x75, 0x10,                    //   Report Size (16)                  1598
+0x95, 0x20,                    //   Report Count (32)                 1600
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1602
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 1604
+0x15, 0x00,                    //   Logical Minimum (0)               1607
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1609
+0x75, 0x20,                    //   Report Size (32)                  1614
+0x95, 0x01,                    //   Report Count (1)                  1616
+0x55, 0x00,                    //   Unit Exponent (0)                 1618
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1620
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  1622
+0x15, 0x00,                    //   Logical Minimum (0)               1625
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1627
+0x75, 0x20,                    //   Report Size (32)                  1632
+0x95, 0x01,                    //   Report Count (1)                  1634
+0x55, 0x00,                    //   Unit Exponent (0)                 1636
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1638
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 1640
+0x75, 0x10,                    //   Report Size (16)                  1643
+0x95, 0x20,                    //   Report Count (32)                 1645
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1647
+0x0a, 0x44, 0x15,              //   Usage (Unknown Usage 0x1544)      1649
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               1652
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1657
+0x75, 0x20,                    //   Report Size (32)                  1662
+0x95, 0x01,                    //   Report Count (1)                  1664
+0x55, 0x00,                    //   Unit Exponent (0)                 1666
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            1668
+0x05, 0x20,                    //   Usage Page (Sensor)               1670
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       1672
+0x15, 0x01,                    //   Logical Minimum (1)               1675
+0x25, 0x07,                    //   Logical Maximum (7)               1677
+0x75, 0x08,                    //   Report Size (8)                   1679
+0x95, 0x01,                    //   Report Count (1)                  1681
+0xa1, 0x02,                    //   Collection (Logical)              1683
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  1685
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      1688
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 1691
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 1694
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 1697
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 1700
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      1703
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             1706
+0xc0,                          //   End Collection                    1708
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       1709
+0x15, 0x01,                    //   Logical Minimum (1)               1712
+0x25, 0x06,                    //   Logical Maximum (6)               1714
+0x75, 0x08,                    //   Report Size (8)                   1716
+0x95, 0x01,                    //   Report Count (1)                  1718
+0xa1, 0x02,                    //   Collection (Logical)              1720
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    1722
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 1725
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 1728
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 1731
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 1734
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 1737
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             1740
+0xc0,                          //   End Collection                    1742
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 1743
+0x75, 0x20,                    //   Report Size (32)                  1746
+0x95, 0x01,                    //   Report Count (1)                  1748
+0x55, 0x00,                    //   Unit Exponent (0)                 1750
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1752
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 1754
+0x75, 0x20,                    //   Report Size (32)                  1757
+0x95, 0x01,                    //   Report Count (1)                  1759
+0x55, 0x00,                    //   Unit Exponent (0)                 1761
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1763
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     1765
+0x75, 0x20,                    //   Report Size (32)                  1768
+0x95, 0x02,                    //   Report Count (2)                  1770
+0x55, 0x09,                    //   Unit Exponent (-7)                1772
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1774
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 1776
+0x75, 0x20,                    //   Report Size (32)                  1779
+0x95, 0x02,                    //   Report Count (2)                  1781
+0x55, 0x06,                    //   Unit Exponent (6)                 1783
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1785
+0x0a, 0x44, 0x05,              //   Usage (Data Field: Custom Value 1) 1787
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               1790
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           1793
+0x75, 0x10,                    //   Report Size (16)                  1796
+0x95, 0x01,                    //   Report Count (1)                  1798
+0x55, 0x00,                    //   Unit Exponent (0)                 1800
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1802
+0x0a, 0x45, 0x05,              //   Usage (Data Field: Custom Value 2) 1804
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               1807
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           1810
+0x75, 0x10,                    //   Report Size (16)                  1813
+0x95, 0x01,                    //   Report Count (1)                  1815
+0x55, 0x00,                    //   Unit Exponent (0)                 1817
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1819
+0x0a, 0x46, 0x05,              //   Usage (Data Field: Custom Value 3) 1821
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               1824
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1829
+0x75, 0x20,                    //   Report Size (32)                  1834
+0x95, 0x01,                    //   Report Count (1)                  1836
+0x55, 0x00,                    //   Unit Exponent (0)                 1838
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1840
+0x0a, 0x47, 0x05,              //   Usage (Data Field: Custom Value 4) 1842
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               1845
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1850
+0x75, 0x20,                    //   Report Size (32)                  1855
+0x95, 0x01,                    //   Report Count (1)                  1857
+0x55, 0x00,                    //   Unit Exponent (0)                 1859
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1861
+0x0a, 0x48, 0x05,              //   Usage (Data Field: Custom Value 5) 1863
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               1866
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      1871
+0x75, 0x20,                    //   Report Size (32)                  1876
+0x95, 0x01,                    //   Report Count (1)                  1878
+0x55, 0x00,                    //   Unit Exponent (0)                 1880
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1882
+0x0a, 0x49, 0x05,              //   Usage (Data Field: Custom Value 6) 1884
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               1887
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           1890
+0x75, 0x10,                    //   Report Size (16)                  1893
+0x95, 0x01,                    //   Report Count (1)                  1895
+0x55, 0x00,                    //   Unit Exponent (0)                 1897
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1899
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  1901
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               1904
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           1907
+0x75, 0x10,                    //   Report Size (16)                  1910
+0x95, 0x01,                    //   Report Count (1)                  1912
+0x55, 0x00,                    //   Unit Exponent (0)                 1914
+0x81, 0x02,                    //   Input (Data,Var,Abs)              1916
+0xc0,                          //  End Collection                     1918
+0x85, 0x05,                    //  Report ID (5)                      1919
+0x05, 0x20,                    //  Usage Page (Sensor)                1921
+0x09, 0xe1,                    //  Usage (Other: Custom)              1923
+0xa1, 0x00,                    //  Collection (Physical)              1925
+0x05, 0x20,                    //   Usage Page (Sensor)               1927
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 1929
+0x15, 0x01,                    //   Logical Minimum (1)               1932
+0x25, 0x03,                    //   Logical Maximum (3)               1934
+0x75, 0x08,                    //   Report Size (8)                   1936
+0x95, 0x01,                    //   Report Count (1)                  1938
+0xa1, 0x02,                    //   Collection (Logical)              1940
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 1942
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 1945
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 1948
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1951
+0xc0,                          //   End Collection                    1953
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       1954
+0x15, 0x01,                    //   Logical Minimum (1)               1957
+0x25, 0x07,                    //   Logical Maximum (7)               1959
+0x75, 0x08,                    //   Report Size (8)                   1961
+0x95, 0x01,                    //   Report Count (1)                  1963
+0xa1, 0x02,                    //   Collection (Logical)              1965
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  1967
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      1970
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 1973
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 1976
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 1979
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 1982
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      1985
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           1988
+0xc0,                          //   End Collection                    1990
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 1991
+0x15, 0x01,                    //   Logical Minimum (1)               1994
+0x25, 0x03,                    //   Logical Maximum (3)               1996
+0x75, 0x08,                    //   Report Size (8)                   1998
+0x95, 0x01,                    //   Report Count (1)                  2000
+0xa1, 0x02,                    //   Collection (Logical)              2002
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 2004
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 2007
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 2010
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2013
+0xc0,                          //   End Collection                    2015
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     2016
+0x15, 0x01,                    //   Logical Minimum (1)               2019
+0x25, 0x06,                    //   Logical Maximum (6)               2021
+0x75, 0x08,                    //   Report Size (8)                   2023
+0x95, 0x01,                    //   Report Count (1)                  2025
+0xa1, 0x02,                    //   Collection (Logical)              2027
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   2029
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 2032
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 2035
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 2038
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 2041
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 2044
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2047
+0xc0,                          //   End Collection                    2049
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 2050
+0x15, 0x00,                    //   Logical Minimum (0)               2053
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2055
+0x75, 0x20,                    //   Report Size (32)                  2060
+0x95, 0x01,                    //   Report Count (1)                  2062
+0x55, 0x00,                    //   Unit Exponent (0)                 2064
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2066
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 2068
+0x15, 0x00,                    //   Logical Minimum (0)               2071
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2073
+0x75, 0x20,                    //   Report Size (32)                  2078
+0x95, 0x01,                    //   Report Count (1)                  2080
+0x55, 0x00,                    //   Unit Exponent (0)                 2082
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2084
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 2086
+0x75, 0x10,                    //   Report Size (16)                  2089
+0x95, 0x07,                    //   Report Count (7)                  2091
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2093
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 2095
+0x75, 0x10,                    //   Report Size (16)                  2098
+0x95, 0x16,                    //   Report Count (22)                 2100
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2102
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    2104
+0x75, 0x10,                    //   Report Size (16)                  2107
+0x95, 0x17,                    //   Report Count (23)                 2109
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2111
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 2113
+0x75, 0x10,                    //   Report Size (16)                  2116
+0x95, 0x10,                    //   Report Count (16)                 2118
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2120
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   2122
+0x75, 0x10,                    //   Report Size (16)                  2125
+0x95, 0x20,                    //   Report Count (32)                 2127
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2129
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 2131
+0x15, 0x00,                    //   Logical Minimum (0)               2134
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2136
+0x75, 0x20,                    //   Report Size (32)                  2141
+0x95, 0x01,                    //   Report Count (1)                  2143
+0x55, 0x00,                    //   Unit Exponent (0)                 2145
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2147
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  2149
+0x15, 0x00,                    //   Logical Minimum (0)               2152
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2154
+0x75, 0x20,                    //   Report Size (32)                  2159
+0x95, 0x01,                    //   Report Count (1)                  2161
+0x55, 0x00,                    //   Unit Exponent (0)                 2163
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2165
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 2167
+0x75, 0x10,                    //   Report Size (16)                  2170
+0x95, 0x20,                    //   Report Count (32)                 2172
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2174
+0x0a, 0xb1, 0x14,              //   Usage (Unknown Usage 0x14b1)      2176
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               2179
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2184
+0x75, 0x20,                    //   Report Size (32)                  2189
+0x95, 0x01,                    //   Report Count (1)                  2191
+0x55, 0x00,                    //   Unit Exponent (0)                 2193
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2195
+0x05, 0x20,                    //   Usage Page (Sensor)               2197
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       2199
+0x15, 0x01,                    //   Logical Minimum (1)               2202
+0x25, 0x07,                    //   Logical Maximum (7)               2204
+0x75, 0x08,                    //   Report Size (8)                   2206
+0x95, 0x01,                    //   Report Count (1)                  2208
+0xa1, 0x02,                    //   Collection (Logical)              2210
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  2212
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      2215
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 2218
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 2221
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 2224
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 2227
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      2230
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             2233
+0xc0,                          //   End Collection                    2235
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       2236
+0x15, 0x01,                    //   Logical Minimum (1)               2239
+0x25, 0x06,                    //   Logical Maximum (6)               2241
+0x75, 0x08,                    //   Report Size (8)                   2243
+0x95, 0x01,                    //   Report Count (1)                  2245
+0xa1, 0x02,                    //   Collection (Logical)              2247
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    2249
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 2252
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 2255
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 2258
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 2261
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 2264
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             2267
+0xc0,                          //   End Collection                    2269
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 2270
+0x75, 0x20,                    //   Report Size (32)                  2273
+0x95, 0x01,                    //   Report Count (1)                  2275
+0x55, 0x00,                    //   Unit Exponent (0)                 2277
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2279
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 2281
+0x75, 0x20,                    //   Report Size (32)                  2284
+0x95, 0x01,                    //   Report Count (1)                  2286
+0x55, 0x00,                    //   Unit Exponent (0)                 2288
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2290
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     2292
+0x75, 0x20,                    //   Report Size (32)                  2295
+0x95, 0x02,                    //   Report Count (2)                  2297
+0x55, 0x09,                    //   Unit Exponent (-7)                2299
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2301
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 2303
+0x75, 0x20,                    //   Report Size (32)                  2306
+0x95, 0x02,                    //   Report Count (2)                  2308
+0x55, 0x06,                    //   Unit Exponent (6)                 2310
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2312
+0x0a, 0x44, 0x05,              //   Usage (Data Field: Custom Value 1) 2314
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     2317
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      2322
+0x75, 0x20,                    //   Report Size (32)                  2327
+0x95, 0x01,                    //   Report Count (1)                  2329
+0x55, 0x00,                    //   Unit Exponent (0)                 2331
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2333
+0x0a, 0x45, 0x05,              //   Usage (Data Field: Custom Value 2) 2335
+0x15, 0x80,                    //   Logical Minimum (-128)            2338
+0x25, 0x7f,                    //   Logical Maximum (127)             2340
+0x75, 0x08,                    //   Report Size (8)                   2342
+0x95, 0x01,                    //   Report Count (1)                  2344
+0x55, 0x00,                    //   Unit Exponent (0)                 2346
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2348
+0x0a, 0xb1, 0x04,              //   Usage (Data Field: Human Presence) 2350
+0x15, 0x80,                    //   Logical Minimum (-128)            2353
+0x25, 0x7f,                    //   Logical Maximum (127)             2355
+0x75, 0x08,                    //   Report Size (8)                   2357
+0x95, 0x01,                    //   Report Count (1)                  2359
+0x55, 0x00,                    //   Unit Exponent (0)                 2361
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2363
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  2365
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               2368
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           2371
+0x75, 0x10,                    //   Report Size (16)                  2374
+0x95, 0x01,                    //   Report Count (1)                  2376
+0x55, 0x00,                    //   Unit Exponent (0)                 2378
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2380
+0xc0,                          //  End Collection                     2382
+0x85, 0x06,                    //  Report ID (6)                      2383
+0x05, 0x20,                    //  Usage Page (Sensor)                2385
+0x09, 0xe1,                    //  Usage (Other: Custom)              2387
+0xa1, 0x00,                    //  Collection (Physical)              2389
+0x05, 0x20,                    //   Usage Page (Sensor)               2391
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 2393
+0x15, 0x01,                    //   Logical Minimum (1)               2396
+0x25, 0x03,                    //   Logical Maximum (3)               2398
+0x75, 0x08,                    //   Report Size (8)                   2400
+0x95, 0x01,                    //   Report Count (1)                  2402
+0xa1, 0x02,                    //   Collection (Logical)              2404
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 2406
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 2409
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 2412
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2415
+0xc0,                          //   End Collection                    2417
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       2418
+0x15, 0x01,                    //   Logical Minimum (1)               2421
+0x25, 0x07,                    //   Logical Maximum (7)               2423
+0x75, 0x08,                    //   Report Size (8)                   2425
+0x95, 0x01,                    //   Report Count (1)                  2427
+0xa1, 0x02,                    //   Collection (Logical)              2429
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  2431
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      2434
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 2437
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 2440
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 2443
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 2446
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      2449
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2452
+0xc0,                          //   End Collection                    2454
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 2455
+0x15, 0x01,                    //   Logical Minimum (1)               2458
+0x25, 0x03,                    //   Logical Maximum (3)               2460
+0x75, 0x08,                    //   Report Size (8)                   2462
+0x95, 0x01,                    //   Report Count (1)                  2464
+0xa1, 0x02,                    //   Collection (Logical)              2466
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 2468
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 2471
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 2474
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2477
+0xc0,                          //   End Collection                    2479
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     2480
+0x15, 0x01,                    //   Logical Minimum (1)               2483
+0x25, 0x06,                    //   Logical Maximum (6)               2485
+0x75, 0x08,                    //   Report Size (8)                   2487
+0x95, 0x01,                    //   Report Count (1)                  2489
+0xa1, 0x02,                    //   Collection (Logical)              2491
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   2493
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 2496
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 2499
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 2502
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 2505
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 2508
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2511
+0xc0,                          //   End Collection                    2513
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 2514
+0x15, 0x00,                    //   Logical Minimum (0)               2517
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2519
+0x75, 0x20,                    //   Report Size (32)                  2524
+0x95, 0x01,                    //   Report Count (1)                  2526
+0x55, 0x00,                    //   Unit Exponent (0)                 2528
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2530
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 2532
+0x15, 0x00,                    //   Logical Minimum (0)               2535
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2537
+0x75, 0x20,                    //   Report Size (32)                  2542
+0x95, 0x01,                    //   Report Count (1)                  2544
+0x55, 0x00,                    //   Unit Exponent (0)                 2546
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2548
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 2550
+0x75, 0x10,                    //   Report Size (16)                  2553
+0x95, 0x07,                    //   Report Count (7)                  2555
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2557
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 2559
+0x75, 0x10,                    //   Report Size (16)                  2562
+0x95, 0x16,                    //   Report Count (22)                 2564
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2566
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    2568
+0x75, 0x10,                    //   Report Size (16)                  2571
+0x95, 0x17,                    //   Report Count (23)                 2573
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2575
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 2577
+0x75, 0x10,                    //   Report Size (16)                  2580
+0x95, 0x10,                    //   Report Count (16)                 2582
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2584
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   2586
+0x75, 0x10,                    //   Report Size (16)                  2589
+0x95, 0x20,                    //   Report Count (32)                 2591
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2593
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 2595
+0x15, 0x00,                    //   Logical Minimum (0)               2598
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2600
+0x75, 0x20,                    //   Report Size (32)                  2605
+0x95, 0x01,                    //   Report Count (1)                  2607
+0x55, 0x00,                    //   Unit Exponent (0)                 2609
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2611
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  2613
+0x15, 0x00,                    //   Logical Minimum (0)               2616
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2618
+0x75, 0x20,                    //   Report Size (32)                  2623
+0x95, 0x01,                    //   Report Count (1)                  2625
+0x55, 0x00,                    //   Unit Exponent (0)                 2627
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2629
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 2631
+0x75, 0x10,                    //   Report Size (16)                  2634
+0x95, 0x20,                    //   Report Count (32)                 2636
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2638
+0x0a, 0x44, 0x15,              //   Usage (Unknown Usage 0x1544)      2640
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               2643
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2648
+0x75, 0x20,                    //   Report Size (32)                  2653
+0x95, 0x01,                    //   Report Count (1)                  2655
+0x55, 0x00,                    //   Unit Exponent (0)                 2657
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2659
+0x05, 0x20,                    //   Usage Page (Sensor)               2661
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       2663
+0x15, 0x01,                    //   Logical Minimum (1)               2666
+0x25, 0x07,                    //   Logical Maximum (7)               2668
+0x75, 0x08,                    //   Report Size (8)                   2670
+0x95, 0x01,                    //   Report Count (1)                  2672
+0xa1, 0x02,                    //   Collection (Logical)              2674
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  2676
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      2679
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 2682
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 2685
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 2688
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 2691
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      2694
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             2697
+0xc0,                          //   End Collection                    2699
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       2700
+0x15, 0x01,                    //   Logical Minimum (1)               2703
+0x25, 0x06,                    //   Logical Maximum (6)               2705
+0x75, 0x08,                    //   Report Size (8)                   2707
+0x95, 0x01,                    //   Report Count (1)                  2709
+0xa1, 0x02,                    //   Collection (Logical)              2711
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    2713
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 2716
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 2719
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 2722
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 2725
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 2728
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             2731
+0xc0,                          //   End Collection                    2733
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 2734
+0x75, 0x20,                    //   Report Size (32)                  2737
+0x95, 0x01,                    //   Report Count (1)                  2739
+0x55, 0x00,                    //   Unit Exponent (0)                 2741
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2743
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 2745
+0x75, 0x20,                    //   Report Size (32)                  2748
+0x95, 0x01,                    //   Report Count (1)                  2750
+0x55, 0x00,                    //   Unit Exponent (0)                 2752
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2754
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     2756
+0x75, 0x20,                    //   Report Size (32)                  2759
+0x95, 0x02,                    //   Report Count (2)                  2761
+0x55, 0x09,                    //   Unit Exponent (-7)                2763
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2765
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 2767
+0x75, 0x20,                    //   Report Size (32)                  2770
+0x95, 0x02,                    //   Report Count (2)                  2772
+0x55, 0x06,                    //   Unit Exponent (6)                 2774
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2776
+0x0a, 0x44, 0x05,              //   Usage (Data Field: Custom Value 1) 2778
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               2781
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2786
+0x75, 0x20,                    //   Report Size (32)                  2791
+0x95, 0x01,                    //   Report Count (1)                  2793
+0x55, 0x00,                    //   Unit Exponent (0)                 2795
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2797
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  2799
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               2802
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           2805
+0x75, 0x10,                    //   Report Size (16)                  2808
+0x95, 0x01,                    //   Report Count (1)                  2810
+0x55, 0x00,                    //   Unit Exponent (0)                 2812
+0x81, 0x02,                    //   Input (Data,Var,Abs)              2814
+0xc0,                          //  End Collection                     2816
+0x85, 0x07,                    //  Report ID (7)                      2817
+0x05, 0x20,                    //  Usage Page (Sensor)                2819
+0x09, 0xe1,                    //  Usage (Other: Custom)              2821
+0xa1, 0x00,                    //  Collection (Physical)              2823
+0x05, 0x20,                    //   Usage Page (Sensor)               2825
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 2827
+0x15, 0x01,                    //   Logical Minimum (1)               2830
+0x25, 0x03,                    //   Logical Maximum (3)               2832
+0x75, 0x08,                    //   Report Size (8)                   2834
+0x95, 0x01,                    //   Report Count (1)                  2836
+0xa1, 0x02,                    //   Collection (Logical)              2838
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 2840
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 2843
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 2846
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2849
+0xc0,                          //   End Collection                    2851
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       2852
+0x15, 0x01,                    //   Logical Minimum (1)               2855
+0x25, 0x07,                    //   Logical Maximum (7)               2857
+0x75, 0x08,                    //   Report Size (8)                   2859
+0x95, 0x01,                    //   Report Count (1)                  2861
+0xa1, 0x02,                    //   Collection (Logical)              2863
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  2865
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      2868
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 2871
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 2874
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 2877
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 2880
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      2883
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2886
+0xc0,                          //   End Collection                    2888
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 2889
+0x15, 0x01,                    //   Logical Minimum (1)               2892
+0x25, 0x03,                    //   Logical Maximum (3)               2894
+0x75, 0x08,                    //   Report Size (8)                   2896
+0x95, 0x01,                    //   Report Count (1)                  2898
+0xa1, 0x02,                    //   Collection (Logical)              2900
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 2902
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 2905
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 2908
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2911
+0xc0,                          //   End Collection                    2913
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     2914
+0x15, 0x01,                    //   Logical Minimum (1)               2917
+0x25, 0x06,                    //   Logical Maximum (6)               2919
+0x75, 0x08,                    //   Report Size (8)                   2921
+0x95, 0x01,                    //   Report Count (1)                  2923
+0xa1, 0x02,                    //   Collection (Logical)              2925
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   2927
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 2930
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 2933
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 2936
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 2939
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 2942
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           2945
+0xc0,                          //   End Collection                    2947
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 2948
+0x15, 0x00,                    //   Logical Minimum (0)               2951
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2953
+0x75, 0x20,                    //   Report Size (32)                  2958
+0x95, 0x01,                    //   Report Count (1)                  2960
+0x55, 0x00,                    //   Unit Exponent (0)                 2962
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2964
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 2966
+0x15, 0x00,                    //   Logical Minimum (0)               2969
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      2971
+0x75, 0x20,                    //   Report Size (32)                  2976
+0x95, 0x01,                    //   Report Count (1)                  2978
+0x55, 0x00,                    //   Unit Exponent (0)                 2980
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2982
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 2984
+0x75, 0x10,                    //   Report Size (16)                  2987
+0x95, 0x07,                    //   Report Count (7)                  2989
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            2991
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 2993
+0x75, 0x10,                    //   Report Size (16)                  2996
+0x95, 0x16,                    //   Report Count (22)                 2998
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3000
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    3002
+0x75, 0x10,                    //   Report Size (16)                  3005
+0x95, 0x17,                    //   Report Count (23)                 3007
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3009
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 3011
+0x75, 0x10,                    //   Report Size (16)                  3014
+0x95, 0x10,                    //   Report Count (16)                 3016
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3018
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   3020
+0x75, 0x10,                    //   Report Size (16)                  3023
+0x95, 0x20,                    //   Report Count (32)                 3025
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3027
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 3029
+0x15, 0x00,                    //   Logical Minimum (0)               3032
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3034
+0x75, 0x20,                    //   Report Size (32)                  3039
+0x95, 0x01,                    //   Report Count (1)                  3041
+0x55, 0x00,                    //   Unit Exponent (0)                 3043
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3045
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  3047
+0x15, 0x00,                    //   Logical Minimum (0)               3050
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3052
+0x75, 0x20,                    //   Report Size (32)                  3057
+0x95, 0x01,                    //   Report Count (1)                  3059
+0x55, 0x00,                    //   Unit Exponent (0)                 3061
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3063
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 3065
+0x75, 0x10,                    //   Report Size (16)                  3068
+0x95, 0x20,                    //   Report Count (32)                 3070
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3072
+0x0a, 0x44, 0x15,              //   Usage (Unknown Usage 0x1544)      3074
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               3077
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3082
+0x75, 0x20,                    //   Report Size (32)                  3087
+0x95, 0x01,                    //   Report Count (1)                  3089
+0x55, 0x00,                    //   Unit Exponent (0)                 3091
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3093
+0x05, 0x20,                    //   Usage Page (Sensor)               3095
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       3097
+0x15, 0x01,                    //   Logical Minimum (1)               3100
+0x25, 0x07,                    //   Logical Maximum (7)               3102
+0x75, 0x08,                    //   Report Size (8)                   3104
+0x95, 0x01,                    //   Report Count (1)                  3106
+0xa1, 0x02,                    //   Collection (Logical)              3108
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  3110
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      3113
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 3116
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 3119
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 3122
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 3125
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      3128
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             3131
+0xc0,                          //   End Collection                    3133
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       3134
+0x15, 0x01,                    //   Logical Minimum (1)               3137
+0x25, 0x06,                    //   Logical Maximum (6)               3139
+0x75, 0x08,                    //   Report Size (8)                   3141
+0x95, 0x01,                    //   Report Count (1)                  3143
+0xa1, 0x02,                    //   Collection (Logical)              3145
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    3147
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 3150
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 3153
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 3156
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 3159
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 3162
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             3165
+0xc0,                          //   End Collection                    3167
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 3168
+0x75, 0x20,                    //   Report Size (32)                  3171
+0x95, 0x01,                    //   Report Count (1)                  3173
+0x55, 0x00,                    //   Unit Exponent (0)                 3175
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3177
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 3179
+0x75, 0x20,                    //   Report Size (32)                  3182
+0x95, 0x01,                    //   Report Count (1)                  3184
+0x55, 0x00,                    //   Unit Exponent (0)                 3186
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3188
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     3190
+0x75, 0x20,                    //   Report Size (32)                  3193
+0x95, 0x02,                    //   Report Count (2)                  3195
+0x55, 0x09,                    //   Unit Exponent (-7)                3197
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3199
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 3201
+0x75, 0x20,                    //   Report Size (32)                  3204
+0x95, 0x02,                    //   Report Count (2)                  3206
+0x55, 0x06,                    //   Unit Exponent (6)                 3208
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3210
+0x0a, 0x44, 0x05,              //   Usage (Data Field: Custom Value 1) 3212
+0x15, 0x00,                    //   Logical Minimum (0)               3215
+0x25, 0xff,                    //   Logical Maximum (255)             3217
+0x75, 0x08,                    //   Report Size (8)                   3219
+0x95, 0x01,                    //   Report Count (1)                  3221
+0x55, 0x00,                    //   Unit Exponent (0)                 3223
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3225
+0x0a, 0x41, 0x05,              //   Usage (Data Field: Custom Usage)  3227
+0x16, 0x00, 0x00,              //   Logical Minimum (0)               3230
+0x26, 0xff, 0xff,              //   Logical Maximum (65535)           3233
+0x75, 0x10,                    //   Report Size (16)                  3236
+0x95, 0x01,                    //   Report Count (1)                  3238
+0x55, 0x00,                    //   Unit Exponent (0)                 3240
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3242
+0xc0,                          //  End Collection                     3244
+0x85, 0x08,                    //  Report ID (8)                      3245
+0x05, 0x20,                    //  Usage Page (Sensor)                3247
+0x09, 0x73,                    //  Usage (Motion: Accelerometer 3D)   3249
+0xa1, 0x00,                    //  Collection (Physical)              3251
+0x05, 0x20,                    //   Usage Page (Sensor)               3253
+0x0a, 0x16, 0x03,              //   Usage (Property: Reporting State) 3255
+0x15, 0x01,                    //   Logical Minimum (1)               3258
+0x25, 0x03,                    //   Logical Maximum (3)               3260
+0x75, 0x08,                    //   Report Size (8)                   3262
+0x95, 0x01,                    //   Report Count (1)                  3264
+0xa1, 0x02,                    //   Collection (Logical)              3266
+0x0a, 0x40, 0x08,              //    Usage (Reporting State: Report No Events) 3268
+0x0a, 0x41, 0x08,              //    Usage (Reporting State: Report All Events) 3271
+0x0a, 0x42, 0x08,              //    Usage (Reporting State: Report Threshold Events) 3274
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           3277
+0xc0,                          //   End Collection                    3279
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       3280
+0x15, 0x01,                    //   Logical Minimum (1)               3283
+0x25, 0x07,                    //   Logical Maximum (7)               3285
+0x75, 0x08,                    //   Report Size (8)                   3287
+0x95, 0x01,                    //   Report Count (1)                  3289
+0xa1, 0x02,                    //   Collection (Logical)              3291
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  3293
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      3296
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 3299
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 3302
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 3305
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 3308
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      3311
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           3314
+0xc0,                          //   End Collection                    3316
+0x0a, 0x09, 0x03,              //   Usage (Property: Sensor Connection Type) 3317
+0x15, 0x01,                    //   Logical Minimum (1)               3320
+0x25, 0x03,                    //   Logical Maximum (3)               3322
+0x75, 0x08,                    //   Report Size (8)                   3324
+0x95, 0x01,                    //   Report Count (1)                  3326
+0xa1, 0x02,                    //   Collection (Logical)              3328
+0x0a, 0x30, 0x08,              //    Usage (Connection Type: PC Integrated) 3330
+0x0a, 0x31, 0x08,              //    Usage (Connection Type: PC Attached) 3333
+0x0a, 0x32, 0x08,              //    Usage (Connection Type: PC External) 3336
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           3339
+0xc0,                          //   End Collection                    3341
+0x0a, 0x19, 0x03,              //   Usage (Property: Power State)     3342
+0x15, 0x01,                    //   Logical Minimum (1)               3345
+0x25, 0x06,                    //   Logical Maximum (6)               3347
+0x75, 0x08,                    //   Report Size (8)                   3349
+0x95, 0x01,                    //   Report Count (1)                  3351
+0xa1, 0x02,                    //   Collection (Logical)              3353
+0x0a, 0x50, 0x08,              //    Usage (Power State: Undefined)   3355
+0x0a, 0x51, 0x08,              //    Usage (Power State: D0 Full Power) 3358
+0x0a, 0x52, 0x08,              //    Usage (Power State: D1 Low Power) 3361
+0x0a, 0x53, 0x08,              //    Usage (Power State: D2 Standby Power with Wakeup) 3364
+0x0a, 0x54, 0x08,              //    Usage (Power State: D3 Sleep with Wakeup) 3367
+0x0a, 0x55, 0x08,              //    Usage (Power State: D4 Power Off) 3370
+0xb1, 0x00,                    //    Feature (Data,Arr,Abs)           3373
+0xc0,                          //   End Collection                    3375
+0x0a, 0x04, 0x03,              //   Usage (Property: Minimum Report Interval) 3376
+0x15, 0x00,                    //   Logical Minimum (0)               3379
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3381
+0x75, 0x20,                    //   Report Size (32)                  3386
+0x95, 0x01,                    //   Report Count (1)                  3388
+0x55, 0x00,                    //   Unit Exponent (0)                 3390
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3392
+0x0a, 0x0e, 0x03,              //   Usage (Property: Report Interval) 3394
+0x15, 0x00,                    //   Logical Minimum (0)               3397
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3399
+0x75, 0x20,                    //   Report Size (32)                  3404
+0x95, 0x01,                    //   Report Count (1)                  3406
+0x55, 0x00,                    //   Unit Exponent (0)                 3408
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3410
+0x0a, 0x08, 0x03,              //   Usage (Property: Sensor Description) 3412
+0x75, 0x10,                    //   Report Size (16)                  3415
+0x95, 0x07,                    //   Report Count (7)                  3417
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3419
+0x0a, 0x07, 0x03,              //   Usage (Property: Sensor Serial Number) 3421
+0x75, 0x10,                    //   Report Size (16)                  3424
+0x95, 0x16,                    //   Report Count (22)                 3426
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3428
+0x0a, 0x06, 0x03,              //   Usage (Property: Sensor Model)    3430
+0x75, 0x10,                    //   Report Size (16)                  3433
+0x95, 0x17,                    //   Report Count (23)                 3435
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3437
+0x0a, 0x05, 0x03,              //   Usage (Property: Sensor Manufacturer) 3439
+0x75, 0x10,                    //   Report Size (16)                  3442
+0x95, 0x10,                    //   Report Count (16)                 3444
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3446
+0x0a, 0x01, 0x03,              //   Usage (Property: Friendly Name)   3448
+0x75, 0x10,                    //   Report Size (16)                  3451
+0x95, 0x20,                    //   Report Count (32)                 3453
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3455
+0x0a, 0x1a, 0x03,              //   Usage (Property: Maximum FIFO Events) 3457
+0x15, 0x00,                    //   Logical Minimum (0)               3460
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3462
+0x75, 0x20,                    //   Report Size (32)                  3467
+0x95, 0x01,                    //   Report Count (1)                  3469
+0x55, 0x00,                    //   Unit Exponent (0)                 3471
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3473
+0x0a, 0x1b, 0x03,              //   Usage (Property: Report Latency)  3475
+0x15, 0x00,                    //   Logical Minimum (0)               3478
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3480
+0x75, 0x20,                    //   Report Size (32)                  3485
+0x95, 0x01,                    //   Report Count (1)                  3487
+0x55, 0x00,                    //   Unit Exponent (0)                 3489
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3491
+0x0a, 0x02, 0x03,              //   Usage (Property: Persistent Unique ID) 3493
+0x75, 0x10,                    //   Report Size (16)                  3496
+0x95, 0x20,                    //   Report Count (32)                 3498
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3500
+0x0a, 0x52, 0x14,              //   Usage (Unknown Usage 0x1452)      3502
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               3505
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3510
+0x75, 0x20,                    //   Report Size (32)                  3515
+0x95, 0x01,                    //   Report Count (1)                  3517
+0x55, 0x0a,                    //   Unit Exponent (-6)                3519
+0xb1, 0x02,                    //   Feature (Data,Var,Abs)            3521
+0x05, 0x20,                    //   Usage Page (Sensor)               3523
+0x0a, 0x01, 0x02,              //   Usage (Event: Sensor State)       3525
+0x15, 0x01,                    //   Logical Minimum (1)               3528
+0x25, 0x07,                    //   Logical Maximum (7)               3530
+0x75, 0x08,                    //   Report Size (8)                   3532
+0x95, 0x01,                    //   Report Count (1)                  3534
+0xa1, 0x02,                    //   Collection (Logical)              3536
+0x0a, 0x00, 0x08,              //    Usage (Sensor State: Undefined)  3538
+0x0a, 0x01, 0x08,              //    Usage (Sensor State: Ready)      3541
+0x0a, 0x02, 0x08,              //    Usage (Sensor State: Not Available) 3544
+0x0a, 0x03, 0x08,              //    Usage (Sensor State: No Data Sel) 3547
+0x0a, 0x04, 0x08,              //    Usage (Sensor State: Initializing) 3550
+0x0a, 0x05, 0x08,              //    Usage (Sensor State: Access Denied) 3553
+0x0a, 0x06, 0x08,              //    Usage (Sensor State: Error)      3556
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             3559
+0xc0,                          //   End Collection                    3561
+0x0a, 0x02, 0x02,              //   Usage (Event: Sensor Event)       3562
+0x15, 0x01,                    //   Logical Minimum (1)               3565
+0x25, 0x06,                    //   Logical Maximum (6)               3567
+0x75, 0x08,                    //   Report Size (8)                   3569
+0x95, 0x01,                    //   Report Count (1)                  3571
+0xa1, 0x02,                    //   Collection (Logical)              3573
+0x0a, 0x10, 0x08,              //    Usage (Sensor Event: Unknown)    3575
+0x0a, 0x11, 0x08,              //    Usage (Sensor Event: State Changed) 3578
+0x0a, 0x12, 0x08,              //    Usage (Sensor Event: Property Changed) 3581
+0x0a, 0x13, 0x08,              //    Usage (Sensor Event: Data Updated) 3584
+0x0a, 0x14, 0x08,              //    Usage (Sensor Event: Poll Response) 3587
+0x0a, 0x15, 0x08,              //    Usage (Sensor Event: Change Sensitivity) 3590
+0x81, 0x00,                    //    Input (Data,Arr,Abs)             3593
+0xc0,                          //   End Collection                    3595
+0x0a, 0x5f, 0x05,              //   Usage (Data Field: Custom Value 28) 3596
+0x75, 0x20,                    //   Report Size (32)                  3599
+0x95, 0x01,                    //   Report Count (1)                  3601
+0x55, 0x00,                    //   Unit Exponent (0)                 3603
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3605
+0x0a, 0x5e, 0x05,              //   Usage (Data Field: Custom Value 27) 3607
+0x75, 0x20,                    //   Report Size (32)                  3610
+0x95, 0x01,                    //   Report Count (1)                  3612
+0x55, 0x00,                    //   Unit Exponent (0)                 3614
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3616
+0x0a, 0x29, 0x05,              //   Usage (Data Field: Timestamp)     3618
+0x75, 0x20,                    //   Report Size (32)                  3621
+0x95, 0x02,                    //   Report Count (2)                  3623
+0x55, 0x09,                    //   Unit Exponent (-7)                3625
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3627
+0x0a, 0x2b, 0x05,              //   Usage (Data Field: Time Since System Boot) 3629
+0x75, 0x20,                    //   Report Size (32)                  3632
+0x95, 0x02,                    //   Report Count (2)                  3634
+0x55, 0x06,                    //   Unit Exponent (6)                 3636
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3638
+0x0a, 0x53, 0x04,              //   Usage (Data Field: Acceleration Axis X) 3640
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     3643
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      3648
+0x75, 0x20,                    //   Report Size (32)                  3653
+0x95, 0x01,                    //   Report Count (1)                  3655
+0x55, 0x0a,                    //   Unit Exponent (-6)                3657
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3659
+0x0a, 0x54, 0x04,              //   Usage (Data Field: Acceleration Axis Y) 3661
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     3664
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      3669
+0x75, 0x20,                    //   Report Size (32)                  3674
+0x95, 0x01,                    //   Report Count (1)                  3676
+0x55, 0x0a,                    //   Unit Exponent (-6)                3678
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3680
+0x0a, 0x55, 0x04,              //   Usage (Data Field: Acceleration Axis Z) 3682
+0x17, 0x00, 0x00, 0x00, 0x80,  //   Logical Minimum (-2147483648)     3685
+0x27, 0xff, 0xff, 0xff, 0x7f,  //   Logical Maximum (2147483647)      3690
+0x75, 0x20,                    //   Report Size (32)                  3695
+0x95, 0x01,                    //   Report Count (1)                  3697
+0x55, 0x0a,                    //   Unit Exponent (-6)                3699
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3701
+0x0a, 0x51, 0x04,              //   Usage (Data Field: Motion State)  3703
+0x15, 0x00,                    //   Logical Minimum (0)               3706
+0x25, 0xff,                    //   Logical Maximum (255)             3708
+0x75, 0x08,                    //   Report Size (8)                   3710
+0x95, 0x01,                    //   Report Count (1)                  3712
+0x55, 0x00,                    //   Unit Exponent (0)                 3714
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3716
+0x0a, 0x69, 0x05,              //   Usage (Data Field: Generic Data Field) 3718
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               3721
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3726
+0x75, 0xc0,                    //   Report Size (192)                 3731
+0x95, 0x01,                    //   Report Count (1)                  3733
+0x55, 0x0d,                    //   Unit Exponent (-3)                3735
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3737
+0x0a, 0x69, 0x05,              //   Usage (Data Field: Generic Data Field) 3739
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               3742
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3747
+0x75, 0xc0,                    //   Report Size (192)                 3752
+0x95, 0x01,                    //   Report Count (1)                  3754
+0x55, 0x00,                    //   Unit Exponent (0)                 3756
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3758
+0x0a, 0x69, 0x05,              //   Usage (Data Field: Generic Data Field) 3760
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               3763
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3768
+0x75, 0xc0,                    //   Report Size (192)                 3773
+0x95, 0x01,                    //   Report Count (1)                  3775
+0x55, 0x00,                    //   Unit Exponent (0)                 3777
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3779
+0x0a, 0x69, 0x05,              //   Usage (Data Field: Generic Data Field) 3781
+0x17, 0x00, 0x00, 0x00, 0x00,  //   Logical Minimum (0)               3784
+0x27, 0xff, 0xff, 0xff, 0xff,  //   Logical Maximum (4294967295)      3789
+0x75, 0xc0,                    //   Report Size (192)                 3794
+0x95, 0x01,                    //   Report Count (1)                  3796
+0x55, 0x00,                    //   Unit Exponent (0)                 3798
+0x81, 0x02,                    //   Input (Data,Var,Abs)              3800
+0xc0,                          //  End Collection                     3802
+0xc0,                          // End Collection                      3803

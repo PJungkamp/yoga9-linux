@@ -1,4 +1,7 @@
 
+# ignore target folder for compiled scripts
+intel-ish/*/target
+
 # ignore arch build artifacts
 packaging/arch/*/*/
 packaging/arch/*/*.pkg.tar.zst
