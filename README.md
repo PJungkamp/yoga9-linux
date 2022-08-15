@@ -107,3 +107,6 @@ they introduce new code, the license they explicitly specify inside of the
 patch. Please refer to the specific patch and source in question for further
 information. License texts can be obtained at
 https://github.com/torvalds/linux/tree/master/LICENSES.
+
+Any other contents of this repository created by me shall be licensed under the
+MIT license included herein.
