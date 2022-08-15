@@ -168,5 +168,5 @@ index 2f55bc43bfa9..6c4e9994d99c 100644
  	{.id = ALC255_FIXUP_ACER_HEADPHONE_AND_MIC, .name = "alc255-acer-headphone-and-mic"},
  	{.id = ALC285_FIXUP_HP_GPIO_AMP_INIT, .name = "alc285-hp-amp-init"},
 -- 
-2.37.1
+2.37.2
 

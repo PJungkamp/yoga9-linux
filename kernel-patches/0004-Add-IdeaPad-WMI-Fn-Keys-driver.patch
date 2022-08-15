@@ -212,5 +212,5 @@ index 000000000000..04cac40bc044
 +MODULE_DESCRIPTION("Ideapad WMI fn keys driver");
 +MODULE_LICENSE("GPL");
 -- 
-2.37.1
+2.37.2
 

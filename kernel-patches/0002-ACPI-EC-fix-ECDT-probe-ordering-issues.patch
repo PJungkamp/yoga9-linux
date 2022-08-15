@@ -150,5 +150,5 @@ index a1b871a418f8..d2ebe14135bd 100644
  		acpi_ec_free(ec);
  		goto out;
 -- 
-2.37.1
+2.37.2
 

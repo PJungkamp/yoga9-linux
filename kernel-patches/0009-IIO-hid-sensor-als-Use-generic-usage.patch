@@ -1,13 +1,13 @@
-From 130cbb895b609e511b5b12071bf93e8a4bd3a73d Mon Sep 17 00:00:00 2001
+From 4aee1d4fe0d6cbc1e3122f0b60d4960070795381 Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Sat, 13 Aug 2022 19:21:27 +0200
 Subject: [PATCH 9/9] IIO: hid-sensor-als: Use generic usage
 
-Use a generic 'hsdev->usage' instead of the HID_USAGE_SENSOR_ALS this
-allows this driver to drive the Lenvo custom ambient light sensor,
+Use a generic 'hsdev->usage' instead of the HID_USAGE_SENSOR_ALS to
+allow this driver to drive the Lenvo custom ambient light sensor,
 which is registered under a 'custom' usage and not HID_USAGE_SENSOR_ALS.
 
-Adds the Lenovo Intelligent Sensing Solution (LISS) ambient light sensor
+Add the Lenovo Intelligent Sensing Solution (LISS) ambient light sensor
 to the platform device ids.
 
 Signed-off-by: Philipp Jungkamp <p.jungkamp@gmx.net>
@@ -95,5 +95,5 @@ index 5a1a625d8d16..244ee386b48b 100644
  };
  MODULE_DEVICE_TABLE(platform, hid_als_ids);
 -- 
-2.37.1
+2.37.2
 
