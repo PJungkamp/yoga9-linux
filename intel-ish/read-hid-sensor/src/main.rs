@@ -7,9 +7,14 @@ use clap::{Parser, ValueEnum};
 #[derive(ValueEnum, Debug, Clone, Copy, PartialEq, Eq)]
 #[clap(rename_all = "lower")]
 enum SensorType {
-    Custom,
+    /// raw data
+    Raw,
+    /// light level
     Als,
+    /// human presence + proximity
     Hpd,
+    /// wake on approach
+    Woa,
 }
 
 /// Clap CLI interface
@@ -75,16 +80,22 @@ fn main() -> ! {
 
     loop {
         let Report { header, data } = read_report(&mut dev_buffered).expect("can't read report");
-        let Header { timestamp, .. } = header;
+        let Header { timestamp, usage, .. } = header;
 
-        print!("{timestamp}: ");
+        print!("{timestamp}: 0x{usage:x} ");
         match args.sensor_type {
             SensorType::Als => {
-                let als_value = u32::from_le_bytes(data[0x1a..0x1e].try_into().unwrap());
-                println!("ALS: {als_value}");
+                let illuminance = u32::from_le_bytes(data[0x1a..0x1e].try_into().unwrap());
+                println!("illuminance: {illuminance}");
             }
-            SensorType::Custom | SensorType::Hpd => {
-                println!("RAW: {data:02x?}");
+            SensorType::Hpd => {
+                let distance = u16::from_le_bytes(data[0x1a..=0x1b].try_into().unwrap());
+                let certainty = u8::from(data[0x1e]);
+                let presence = 0 != u8::from(data[0x1f]);
+                println!("distance: {distance}mm, certainty: {certainty:3}%, presence: {presence}");
+            }
+            _ => {
+                println!("raw: {data:02x?}");
             }
         }
     }
