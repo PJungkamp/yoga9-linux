@@ -58,15 +58,9 @@ I found a lot of useful information and patches in these threads:
 
 ## Other Devices
 
-The Lenovo Yoga 7 16IAP7 seems to use the same audio codec.
-[0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch](kernel-patches/0007-ALSA-hda-realtek-Add-quirk-for-Yoga-devices.patch)
-adds a quirk to activate the fixup from
-[0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch](kernel-patches/0001-ALSA-hda-realtek-Add-quirk-for-Lenovo-Yoga9-14IAP7.patch)
-on that device.
-
 The AMD models have different audio problems than the intel models, check the Bugzilla issue mentioned above.
 
-If you think that the fixup may also work for your device, you can apply the
+If you think that the audio fixup may also work for your device, you can apply the
 patches yourself and add something like
 [`/etc/modprobe.d/snd.conf`](config/etc/modprobe.d/snd.conf)
 (without the comments) to the force the fixup on your hardware.
