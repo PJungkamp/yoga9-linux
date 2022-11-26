@@ -1,0 +1,350 @@
+From c760a18fc6e43874c4a2b97fbc46298b83cf2daf Mon Sep 17 00:00:00 2001
+From: Philipp Jungkamp <p.jungkamp@gmx.net>
+Date: Sat, 12 Nov 2022 20:27:50 +0100
+Subject: [PATCH 8/8] platform/x86: ideapad-laptop: support for more special
+ keys in WMI
+
+The event data of the WMI event 0xD0, which is assumed to be the
+fn_lock, is used to indicate several special keys on newer Yoga 7/9
+laptops.
+
+The notify_id 0xD0 is non-unique in the DSDT of the Yoga 9 14IAP7, this
+causes wmi_get_event_data() to report wrong values.
+Port the ideapad-laptop WMI code to the wmi bus infrastructure which
+does not suffer from the shortcomings of wmi_get_event_data().
+
+Signed-off-by: Philipp Jungkamp <p.jungkamp@gmx.net>
+---
+ drivers/platform/x86/ideapad-laptop.c | 240 ++++++++++++++++++++------
+ 1 file changed, 188 insertions(+), 52 deletions(-)
+
+diff --git a/drivers/platform/x86/ideapad-laptop.c b/drivers/platform/x86/ideapad-laptop.c
+index abd0c81d62c4..20f2e6109158 100644
+--- a/drivers/platform/x86/ideapad-laptop.c
++++ b/drivers/platform/x86/ideapad-laptop.c
+@@ -30,6 +30,7 @@
+ #include <linux/seq_file.h>
+ #include <linux/sysfs.h>
+ #include <linux/types.h>
++#include <linux/wmi.h>
+ 
+ #include <acpi/video.h>
+ 
+@@ -38,10 +39,13 @@
+ #define IDEAPAD_RFKILL_DEV_NUM	3
+ 
+ #if IS_ENABLED(CONFIG_ACPI_WMI)
+-static const char *const ideapad_wmi_fnesc_events[] = {
+-	"26CAB2E5-5CF1-46AE-AAC3-4A12B6BA50E6", /* Yoga 3 */
+-	"56322276-8493-4CE8-A783-98C991274F5E", /* Yoga 700 */
+-	"8FC0DE0C-B4E4-43FD-B0F3-8871711C1294", /* Legion 5 */
++enum ideapad_wmi_event_type {
++	IDEAPAD_WMI_EVENT_ESC,
++	IDEAPAD_WMI_EVENT_FN_KEYS,
++};
++
++struct ideapad_wmi_private {
++	enum ideapad_wmi_event_type event;
+ };
+ #endif
+ 
+@@ -130,7 +134,6 @@ struct ideapad_private {
+ 	struct ideapad_dytc_priv *dytc;
+ 	struct dentry *debug;
+ 	unsigned long cfg;
+-	const char *fnesc_guid;
+ 	struct {
+ 		bool conservation_mode    : 1;
+ 		bool dytc                 : 1;
+@@ -156,6 +159,42 @@ static bool allow_v4_dytc;
+ module_param(allow_v4_dytc, bool, 0444);
+ MODULE_PARM_DESC(allow_v4_dytc, "Enable DYTC version 4 platform-profile support.");
+ 
++/*
++ * shared data
++ */
++
++static struct ideapad_private *ideapad_shared;
++static DEFINE_MUTEX(ideapad_shared_mutex);
++
++static int ideapad_shared_init(struct ideapad_private *priv)
++{
++	int ret;
++
++	mutex_lock(&ideapad_shared_mutex);
++
++	if (!ideapad_shared) {
++		ideapad_shared = priv;
++		ret = 0;
++	} else {
++		dev_warn(&priv->adev->dev, "found multiple platform devices\n");
++		ret = -EINVAL;
++	}
++
++	mutex_unlock(&ideapad_shared_mutex);
++
++	return ret;
++}
++
++static void ideapad_shared_exit(struct ideapad_private *priv)
++{
++	mutex_lock(&ideapad_shared_mutex);
++
++	if (ideapad_shared == priv)
++		ideapad_shared = NULL;
++
++	mutex_unlock(&ideapad_shared_mutex);
++}
++
+ /*
+  * ACPI Helpers
+  */
+@@ -1074,6 +1113,7 @@ static void ideapad_sysfs_exit(struct ideapad_private *priv)
+ /*
+  * input device
+  */
++#define IDEAPAD_WMI_KEY 0x100
+ static const struct key_entry ideapad_keymap[] = {
+ 	{ KE_KEY,   6, { KEY_SWITCHVIDEOMODE } },
+ 	{ KE_KEY,   7, { KEY_CAMERA } },
+@@ -1087,6 +1127,28 @@ static const struct key_entry ideapad_keymap[] = {
+ 	{ KE_KEY,  66, { KEY_TOUCHPAD_OFF } },
+ 	{ KE_KEY,  67, { KEY_TOUCHPAD_ON } },
+ 	{ KE_KEY, 128, { KEY_ESC } },
++
++	/*
++	 * WMI keys
++	 */
++
++	/* FnLock (handled by the firmware) */
++	{ KE_IGNORE,	0x02 | IDEAPAD_WMI_KEY },
++	/* Esc (handled by the firmware) */
++	{ KE_IGNORE,	0x03 | IDEAPAD_WMI_KEY },
++	/* Customizable Lenovo Hotkey ("star" with 'S' inside) */
++	{ KE_KEY,	0x01 | IDEAPAD_WMI_KEY, { KEY_FAVORITES } },
++	/* Dark mode toggle */
++	{ KE_KEY,	0x13 | IDEAPAD_WMI_KEY, { KEY_PROG1 } },
++	/* Sound profile switch */
++	{ KE_KEY,	0x12 | IDEAPAD_WMI_KEY, { KEY_PROG2 } },
++	/* Lenovo Virtual Background application */
++	{ KE_KEY,	0x28 | IDEAPAD_WMI_KEY, { KEY_PROG3 } },
++	/* Lenovo Support */
++	{ KE_KEY,	0x27 | IDEAPAD_WMI_KEY, { KEY_HELP } },
++	/* Refresh Rate Toggle */
++	{ KE_KEY,	0x0a | IDEAPAD_WMI_KEY, { KEY_DISPLAYTOGGLE } },
++
+ 	{ KE_END },
+ };
+ 
+@@ -1490,30 +1552,6 @@ static void ideapad_acpi_notify(acpi_handle handle, u32 event, void *data)
+ 	}
+ }
+ 
+-#if IS_ENABLED(CONFIG_ACPI_WMI)
+-static void ideapad_wmi_notify(u32 value, void *context)
+-{
+-	struct ideapad_private *priv = context;
+-	unsigned long result;
+-
+-	switch (value) {
+-	case 128:
+-		ideapad_input_report(priv, value);
+-		break;
+-	case 208:
+-		if (!eval_hals(priv->adev->handle, &result)) {
+-			bool state = test_bit(HALS_FNLOCK_STATE_BIT, &result);
+-
+-			exec_sals(priv->adev->handle, state ? SALS_FNLOCK_ON : SALS_FNLOCK_OFF);
+-		}
+-		break;
+-	default:
+-		dev_info(&priv->platform_device->dev,
+-			 "Unknown WMI event: %u\n", value);
+-	}
+-}
+-#endif
+-
+ /*
+  * Some ideapads have a hardware rfkill switch, but most do not have one.
+  * Reading VPCCMD_R_RF always results in 0 on models without a hardware rfkill,
+@@ -1566,6 +1604,95 @@ static void ideapad_check_features(struct ideapad_private *priv)
+ 	}
+ }
+ 
++#if IS_ENABLED(CONFIG_ACPI_WMI)
++/*
++ * WMI driver
++ */
++static int ideapad_wmi_probe(struct wmi_device *wdev, const void *context)
++{
++	struct ideapad_wmi_private *wpriv;
++
++	wpriv = devm_kzalloc(&wdev->dev, sizeof(*wpriv), GFP_KERNEL);
++	if (!wpriv)
++		return -ENOMEM;
++
++	*wpriv = *(struct ideapad_wmi_private *)context;
++
++	dev_set_drvdata(&wdev->dev, wpriv);
++	return 0;
++}
++
++static void ideapad_wmi_notify(struct wmi_device *wdev, union acpi_object *data)
++{
++	struct ideapad_wmi_private *wpriv = dev_get_drvdata(&wdev->dev);
++	struct ideapad_private *priv;
++	unsigned long result;
++
++	mutex_lock(&ideapad_shared_mutex);
++
++	priv = ideapad_shared;
++	if (!priv)
++		goto unlock;
++
++	switch (wpriv->event) {
++	case IDEAPAD_WMI_EVENT_ESC:
++		ideapad_input_report(priv, 128);
++		break;
++	case IDEAPAD_WMI_EVENT_FN_KEYS:
++		if (!eval_hals(priv->adev->handle, &result)) {
++			bool state = test_bit(HALS_FNLOCK_STATE_BIT, &result);
++
++			exec_sals(priv->adev->handle, state ? SALS_FNLOCK_ON : SALS_FNLOCK_OFF);
++		}
++
++		if (data->type != ACPI_TYPE_INTEGER) {
++			dev_warn(&wdev->dev,
++				 "WMI event data is not an integer\n");
++			break;
++		}
++
++		dev_dbg(&wdev->dev, "WMI fn-key event: 0x%llx\n",
++			data->integer.value);
++
++		ideapad_input_report(priv,
++				     data->integer.value | IDEAPAD_WMI_KEY);
++
++		break;
++	}
++unlock:
++	mutex_unlock(&ideapad_shared_mutex);
++}
++
++struct ideapad_wmi_private ideapad_wmi_context_esc = {
++	.event = IDEAPAD_WMI_EVENT_ESC
++};
++
++struct ideapad_wmi_private ideapad_wmi_context_fn_keys = {
++	.event = IDEAPAD_WMI_EVENT_FN_KEYS
++};
++
++static const struct wmi_device_id ideapad_wmi_ids[] = {
++	{ "26CAB2E5-5CF1-46AE-AAC3-4A12B6BA50E6", &ideapad_wmi_context_esc }, /* Yoga 3 */
++	{ "56322276-8493-4CE8-A783-98C991274F5E", &ideapad_wmi_context_esc }, /* Yoga 700 */
++	{ "8FC0DE0C-B4E4-43FD-B0F3-8871711C1294", &ideapad_wmi_context_fn_keys }, /* Legion 5 */
++	{},
++};
++MODULE_DEVICE_TABLE(wmi, ideapad_wmi_ids);
++
++static struct wmi_driver ideapad_wmi_driver = {
++	.driver = {
++		.name = "ideapad_wmi",
++	},
++	.id_table = ideapad_wmi_ids,
++	.probe = ideapad_wmi_probe,
++	.notify = ideapad_wmi_notify,
++};
++
++#endif
++
++/*
++ * ACPI driver
++ */
+ static int ideapad_acpi_add(struct platform_device *pdev)
+ {
+ 	struct acpi_device *adev = ACPI_COMPANION(&pdev->dev);
+@@ -1647,30 +1774,16 @@ static int ideapad_acpi_add(struct platform_device *pdev)
+ 		goto notification_failed;
+ 	}
+ 
+-#if IS_ENABLED(CONFIG_ACPI_WMI)
+-	for (i = 0; i < ARRAY_SIZE(ideapad_wmi_fnesc_events); i++) {
+-		status = wmi_install_notify_handler(ideapad_wmi_fnesc_events[i],
+-						    ideapad_wmi_notify, priv);
+-		if (ACPI_SUCCESS(status)) {
+-			priv->fnesc_guid = ideapad_wmi_fnesc_events[i];
+-			break;
+-		}
+-	}
+-
+-	if (ACPI_FAILURE(status) && status != AE_NOT_EXIST) {
+-		err = -EIO;
+-		goto notification_failed_wmi;
+-	}
+-#endif
++	err = ideapad_shared_init(priv);
++	if (err)
++		goto shared_init_failed;
+ 
+ 	return 0;
+ 
+-#if IS_ENABLED(CONFIG_ACPI_WMI)
+-notification_failed_wmi:
++shared_init_failed:
+ 	acpi_remove_notify_handler(priv->adev->handle,
+ 				   ACPI_DEVICE_NOTIFY,
+ 				   ideapad_acpi_notify);
+-#endif
+ 
+ notification_failed:
+ 	ideapad_backlight_exit(priv);
+@@ -1696,10 +1809,7 @@ static int ideapad_acpi_remove(struct platform_device *pdev)
+ 	struct ideapad_private *priv = dev_get_drvdata(&pdev->dev);
+ 	int i;
+ 
+-#if IS_ENABLED(CONFIG_ACPI_WMI)
+-	if (priv->fnesc_guid)
+-		wmi_remove_notify_handler(priv->fnesc_guid);
+-#endif
++	ideapad_shared_exit(priv);
+ 
+ 	acpi_remove_notify_handler(priv->adev->handle,
+ 				   ACPI_DEVICE_NOTIFY,
+@@ -1751,7 +1861,33 @@ static struct platform_driver ideapad_acpi_driver = {
+ 	},
+ };
+ 
+-module_platform_driver(ideapad_acpi_driver);
++static int __init ideapad_laptop_init(void)
++{
++	int err;
++
++#if IS_ENABLED(CONFIG_ACPI_WMI)
++	err = wmi_driver_register(&ideapad_wmi_driver);
++	if (err)
++		return err;
++#endif
++
++	err = platform_driver_register(&ideapad_acpi_driver);
++	if (err)
++		return err;
++
++	return 0;
++}
++module_init(ideapad_laptop_init)
++
++static void __exit ideapad_laptop_exit(void)
++{
++#if IS_ENABLED(CONFIG_ACPI_WMI)
++	wmi_driver_unregister(&ideapad_wmi_driver);
++#endif
++
++	platform_driver_unregister(&ideapad_acpi_driver);
++}
++module_exit(ideapad_laptop_exit)
+ 
+ MODULE_AUTHOR("David Woodhouse <dwmw2@infradead.org>");
+ MODULE_DESCRIPTION("IdeaPad ACPI Extras");
+-- 
+2.38.1
+

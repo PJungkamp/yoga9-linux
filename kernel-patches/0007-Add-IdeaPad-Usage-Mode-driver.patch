@@ -1,7 +1,7 @@
-From 20d98289a006ae8548307cb18ab0998970b9d83d Mon Sep 17 00:00:00 2001
+From eb9e6a8c9a65fd7b47034722ca07f39c7487e8f9 Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Sat, 30 Jul 2022 15:46:13 +0200
-Subject: [PATCH 5/9] Add IdeaPad Usage Mode driver
+Subject: [PATCH 7/8] Add IdeaPad Usage Mode driver
 
 The so called 'usage mode' reported by the firmware of the Lenovo Yoga
 line via ACPI WMI is mapped to a tablet mode switch input device.
@@ -15,12 +15,12 @@ Signed-off-by: Philipp Jungkamp <p.jungkamp@gmx.net>
  create mode 100644 drivers/platform/x86/ideapad-wmi-usage-mode.c
 
 diff --git a/drivers/platform/x86/Kconfig b/drivers/platform/x86/Kconfig
-index 6ff757332aa0..8a3cf53a3c79 100644
+index f2f98e942cf2..3e4f9ff4d7b7 100644
 --- a/drivers/platform/x86/Kconfig
 +++ b/drivers/platform/x86/Kconfig
-@@ -153,6 +153,17 @@ config IDEAPAD_WMI_FN_KEYS
+@@ -140,6 +140,17 @@ config YOGABOOK_WMI
  	  To compile this driver as a module, choose M here: the module will
- 	  be called ideapad-wmi-fn-keys.
+ 	  be called lenovo-yogabook-wmi.
  
 +config IDEAPAD_WMI_USAGE_MODE
 +	tristate "Lenovo IdeaPad WMI usage mode"
@@ -37,20 +37,20 @@ index 6ff757332aa0..8a3cf53a3c79 100644
  	tristate "Acer Aspire One temperature and fan driver"
  	depends on ACPI && THERMAL
 diff --git a/drivers/platform/x86/Makefile b/drivers/platform/x86/Makefile
-index 5e9b678e48b9..b2b377afd1ab 100644
+index 5a428caa654a..a9f5009e4a3b 100644
 --- a/drivers/platform/x86/Makefile
 +++ b/drivers/platform/x86/Makefile
-@@ -17,6 +17,7 @@ obj-$(CONFIG_XIAOMI_WMI)		+= xiaomi-wmi.o
+@@ -16,6 +16,7 @@ obj-$(CONFIG_PEAQ_WMI)			+= peaq-wmi.o
+ obj-$(CONFIG_XIAOMI_WMI)		+= xiaomi-wmi.o
  obj-$(CONFIG_GIGABYTE_WMI)		+= gigabyte-wmi.o
  obj-$(CONFIG_YOGABOOK_WMI)		+= lenovo-yogabook-wmi.o
- obj-$(CONFIG_IDEAPAD_WMI_FN_KEYS)	+= ideapad-wmi-fn-keys.o
 +obj-$(CONFIG_IDEAPAD_WMI_USAGE_MODE)	+= ideapad-wmi-usage-mode.o
  
  # Acer
  obj-$(CONFIG_ACERHDF)		+= acerhdf.o
 diff --git a/drivers/platform/x86/ideapad-wmi-usage-mode.c b/drivers/platform/x86/ideapad-wmi-usage-mode.c
 new file mode 100644
-index 000000000000..abe61b4776e9
+index 000000000000..23d090c34d61
 --- /dev/null
 +++ b/drivers/platform/x86/ideapad-wmi-usage-mode.c
 @@ -0,0 +1,279 @@
@@ -330,9 +330,9 @@ index 000000000000..abe61b4776e9
 +module_wmi_driver(ideapad_wmi_driver);
 +
 +MODULE_DEVICE_TABLE(wmi, ideapad_wmi_id_table);
-+MODULE_AUTHOR("Philipp Jungkamp <philipp.jungkamp@rwth-aachen.com>");
-+MODULE_DESCRIPTION("Ideapad WMI fn keys driver");
++MODULE_AUTHOR("Philipp Jungkamp <philipp.jungkamp@gmx.net>");
++MODULE_DESCRIPTION("Ideapad WMI usage mode driver");
 +MODULE_LICENSE("GPL");
 -- 
-2.37.2
+2.38.1
 

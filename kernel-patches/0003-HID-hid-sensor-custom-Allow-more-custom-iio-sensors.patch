@@ -1,7 +1,7 @@
-From b2fc341ef26a52aba3dedb76b736d8819e8d8d9b Mon Sep 17 00:00:00 2001
+From 28eab4607c6238f4598ad1c92b6ee9e06d28c972 Mon Sep 17 00:00:00 2001
 From: Philipp Jungkamp <p.jungkamp@gmx.net>
 Date: Tue, 9 Aug 2022 19:54:31 +0200
-Subject: [PATCH 8/9] HID: hid-sensor-custom: More custom iio sensors
+Subject: [PATCH 3/8] HID: hid-sensor-custom: Allow more custom iio sensors
 
 The known LUID table for established/known custom HID sensors was
 limited to sensors with "INTEL" as manufacturer. But some vendors such
@@ -11,17 +11,15 @@ in their custom sensors.
 Expand the known custom sensors table by a tag used for the platform
 device name and match sensors based on the LUID as well as optionally
 on model and manufacturer properties.
-Introduce sensors from Lenovo's "Intelligent Sensing Solution" on the
-Lenovo Yoga 9 14IAP7 as an example.
 
 Signed-off-by: Philipp Jungkamp <p.jungkamp@gmx.net>
 ---
- drivers/hid/hid-sensor-custom.c | 258 ++++++++++++++++++++++++--------
+ drivers/hid/hid-sensor-custom.c | 210 +++++++++++++++++++++-----------
  include/linux/hid-sensor-ids.h  |   1 +
- 2 files changed, 194 insertions(+), 65 deletions(-)
+ 2 files changed, 139 insertions(+), 72 deletions(-)
 
 diff --git a/drivers/hid/hid-sensor-custom.c b/drivers/hid/hid-sensor-custom.c
-index 32c2306e240d..5af8eb12d983 100644
+index 32c2306e240d..734c6bde68fe 100644
 --- a/drivers/hid/hid-sensor-custom.c
 +++ b/drivers/hid/hid-sensor-custom.c
 @@ -5,6 +5,7 @@
@@ -32,7 +30,7 @@ index 32c2306e240d..5af8eb12d983 100644
  #include <linux/kernel.h>
  #include <linux/module.h>
  #include <linux/init.h>
-@@ -750,114 +751,241 @@ static void hid_sensor_custom_dev_if_remove(struct hid_sensor_custom
+@@ -750,114 +751,179 @@ static void hid_sensor_custom_dev_if_remove(struct hid_sensor_custom
  
  }
  
@@ -62,7 +60,11 @@ index 32c2306e240d..5af8eb12d983 100644
 +	u16 model[HID_CUSTOM_MAX_FEATURE_BYTES];
 +	u16 manufacturer[HID_CUSTOM_MAX_FEATURE_BYTES];
 +};
-+
+ 
+-	for (i = 0; i < ARRAY_SIZE(known_sensor_luid); i++) {
+-		if (!strncmp(usage_str, known_sensor_luid[i],
+-			     strlen(known_sensor_luid[i])))
+-			return i;
 +static const struct hid_sensor_custom_match hid_sensor_custom_known_table[] = {
 +	/*
 +	 * Intel Integrated Sensor Hub (ISH)
@@ -72,59 +74,21 @@ index 32c2306e240d..5af8eb12d983 100644
 +		.luid = "020B000000000000",
 +		.manufacturer = "INTEL",
 +	},
-+	/*
-+	 * Lenovo Intelligent Sensing Solution (LISS)
-+	 */
-+	{	/* ambient light */
-+		.tag = "LISS",
-+		.luid = "0041010200000082",
-+		.model = "STK3X3X Sensor",
-+		.manufacturer = "Vendor 258",
-+		.check_dmi = true,
-+		.dmi.matches = {
-+			DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
-+		}
-+	},
-+	{	/* human presence */
-+		.tag = "LISS",
-+		.luid = "0226000171AC0081",
-+		.model = "VL53L1_HOD Sensor",
-+		.manufacturer = "ST_MICRO",
-+		.check_dmi = true,
-+		.dmi.matches = {
-+			DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
-+		}
-+	},
-+	{	/* wake on approach */
-+		.tag = "LISS",
-+		.luid = "00E1001A270E0080",
-+		.model = "LENOVO_ST_HUMANSENSE S",
-+		.manufacturer = "LENOVO",
-+		.check_dmi = true,
-+		.dmi.matches = {
-+			DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
-+		}
-+	},
 +	{}
 +};
- 
--	for (i = 0; i < ARRAY_SIZE(known_sensor_luid); i++) {
--		if (!strncmp(usage_str, known_sensor_luid[i],
--			     strlen(known_sensor_luid[i])))
--			return i;
-+static int hid_sensor_custom_prop_match_str(const u16 *prop, const char *match,
-+					    size_t max_count)
++
++static bool hid_sensor_custom_prop_match_str(const u16 *prop, const char *match,
++					     size_t count)
 +{
-+	while (max_count-- && *prop && *match) {
-+		if (*prop & 0xFF00 ||
-+		    *match != (char) *prop)
-+			return 0;
++	while (count-- && *prop && *match) {
++		if (*prop != (u16) *match)
++			return false;
 +		prop++;
 +		match++;
  	}
  
 -	return -ENODEV;
-+	return 1;
++	return (count == -1) || *prop == (u16)*match;
  }
  
 -static int get_known_custom_sensor_index(struct hid_sensor_hub_device *hsdev)
@@ -134,8 +98,8 @@ index 32c2306e240d..5af8eb12d983 100644
  {
 -	struct hid_sensor_hub_attribute_info sensor_manufacturer = { 0 };
 -	struct hid_sensor_hub_attribute_info sensor_luid_info = { 0 };
+-	int report_size;
 +	struct hid_sensor_hub_attribute_info prop_attr = { 0 };
- 	int report_size;
  	int ret;
 -	static u16 w_buf[HID_CUSTOM_MAX_FEATURE_BYTES];
 -	static char buf[HID_CUSTOM_MAX_FEATURE_BYTES];
@@ -146,33 +110,30 @@ index 32c2306e240d..5af8eb12d983 100644
 +	memset(prop, 0, prop_size);
  
 -	/* get manufacturer info */
-+	/* get property info */
- 	ret = sensor_hub_input_get_attribute_info(hsdev,
+-	ret = sensor_hub_input_get_attribute_info(hsdev,
 -			HID_FEATURE_REPORT, hsdev->usage,
 -			HID_USAGE_SENSOR_PROP_MANUFACTURER, &sensor_manufacturer);
-+						  HID_FEATURE_REPORT,
-+						  hsdev->usage,
-+						  prop_usage_id,
++	ret = sensor_hub_input_get_attribute_info(hsdev, HID_FEATURE_REPORT,
++						  hsdev->usage, prop_usage_id,
 +						  &prop_attr);
-+	/* property does not exist */
  	if (ret < 0)
--		return ret;
-+		return -ENODATA;
+ 		return ret;
  
- 	report_size =
+-	report_size =
 -		sensor_hub_get_feature(hsdev, sensor_manufacturer.report_id,
 -				       sensor_manufacturer.index, sizeof(w_buf),
 -				       w_buf);
-+		sensor_hub_get_feature(hsdev, prop_attr.report_id,
-+				       prop_attr.index, prop_size,
-+				       prop);
- 	if (report_size <= 0) {
- 		hid_err(hsdev->hdev,
+-	if (report_size <= 0) {
+-		hid_err(hsdev->hdev,
 -			"Failed to get sensor manufacturer info %d\n",
-+			"Failed to get sensor property %08x %d\n",
-+			prop_usage_id,
- 			report_size);
- 		return -ENODEV;
+-			report_size);
+-		return -ENODEV;
++	ret = sensor_hub_get_feature(hsdev, prop_attr.report_id,
++				     prop_attr.index, prop_size, prop);
++	if (ret < 0) {
++		hid_err(hsdev->hdev, "Failed to get sensor property %08x %d\n",
++			prop_usage_id, ret);
++		return ret;
  	}
  
 -	/* convert from wide char to char */
@@ -180,59 +141,44 @@ index 32c2306e240d..5af8eb12d983 100644
 -		buf[i] = (char)w_buf[i];
 +	return 0;
 +}
- 
--	/* ensure it's ISH sensor */
--	if (strncmp(buf, "INTEL", strlen("INTEL")))
--		return -ENODEV;
-+static int
++
++static bool
 +hid_sensor_custom_do_match(struct hid_sensor_hub_device *hsdev,
 +			   const struct hid_sensor_custom_match *match,
 +			   const struct hid_sensor_custom_properties *prop)
 +{
 +	struct dmi_system_id dmi[] = { match->dmi, { 0 } };
++
++	if (!hid_sensor_custom_prop_match_str(prop->serial_num, "LUID:", 5) ||
++	    !hid_sensor_custom_prop_match_str(prop->serial_num + 5, match->luid,
++					      HID_CUSTOM_MAX_FEATURE_BYTES - 5))
++		return false;
++
++	if (match->model &&
++	    !hid_sensor_custom_prop_match_str(prop->model, match->model,
++					      HID_CUSTOM_MAX_FEATURE_BYTES))
++		return false;
++
++	if (match->manufacturer &&
++	    !hid_sensor_custom_prop_match_str(prop->manufacturer, match->manufacturer,
++					      HID_CUSTOM_MAX_FEATURE_BYTES))
++		return false;
+ 
+-	/* ensure it's ISH sensor */
+-	if (strncmp(buf, "INTEL", strlen("INTEL")))
+-		return -ENODEV;
++	if (match->check_dmi && !dmi_check_system(dmi))
++		return false;
  
 -	memset(w_buf, 0, sizeof(w_buf));
 -	memset(buf, 0, sizeof(buf));
-+	/*
-+	 * Match the LUID property.
-+	 */
-+	if (!hid_sensor_custom_prop_match_str(prop->serial_num, "LUID:", 5) ||
-+	    !hid_sensor_custom_prop_match_str(prop->serial_num + 5,
-+					      match->luid,
-+					      HID_CUSTOM_MAX_FEATURE_BYTES - 5))
-+		return 0;
++	return true;
++}
  
 -	/* get real usage id */
 -	ret = sensor_hub_input_get_attribute_info(hsdev,
 -			HID_FEATURE_REPORT, hsdev->usage,
 -			HID_USAGE_SENSOR_PROP_SERIAL_NUM, &sensor_luid_info);
-+	/*
-+	 * Match the model property. (optional)
-+	 */
-+	if (match->model &&
-+	    !hid_sensor_custom_prop_match_str(prop->model,
-+					      match->model,
-+					      HID_CUSTOM_MAX_FEATURE_BYTES))
-+		return 0;
-+
-+	/*
-+	 * Match the manufacturer property. (optional)
-+	 */
-+	if (match->manufacturer &&
-+	    !hid_sensor_custom_prop_match_str(prop->manufacturer,
-+					      match->manufacturer,
-+					      HID_CUSTOM_MAX_FEATURE_BYTES))
-+		return 0;
-+
-+	/*
-+	 * Match DMI. (optional)
-+	 */
-+	if (match->check_dmi && !dmi_check_system(dmi))
-+		return 0;
-+
-+	return 1;
-+}
-+
 +static int
 +hid_sensor_custom_properties_get(struct hid_sensor_hub_device *hsdev,
 +				 struct hid_sensor_custom_properties *prop)
@@ -254,30 +200,29 @@ index 32c2306e240d..5af8eb12d983 100644
 -			report_size);
 -		return -ENODEV;
 -	}
-+	ret = hid_sensor_custom_get_prop(hsdev,
-+					 HID_USAGE_SENSOR_PROP_MODEL,
-+					 HID_CUSTOM_MAX_FEATURE_BYTES,
-+					 prop->model);
-+	if (ret < 0 && ret != -ENODATA)
-+		return ret;
++	/*
++	 * Ignore errors on the following model and manufacturer properties.
++	 * Because these are optional, it is not an error if they are missing.
++	 */
++
++	hid_sensor_custom_get_prop(hsdev, HID_USAGE_SENSOR_PROP_MODEL,
++				   HID_CUSTOM_MAX_FEATURE_BYTES,
++				   prop->model);
  
 -	/* convert from wide char to char */
 -	for (i = 0; i < ARRAY_SIZE(buf) - 1 && w_buf[i]; i++)
 -		buf[i] = (char)w_buf[i];
-+	ret = hid_sensor_custom_get_prop(hsdev,
-+					 HID_USAGE_SENSOR_PROP_MANUFACTURER,
-+					 HID_CUSTOM_MAX_FEATURE_BYTES,
-+					 prop->manufacturer);
-+	if (ret < 0 && ret != -ENODATA)
-+		return ret;
++	hid_sensor_custom_get_prop(hsdev, HID_USAGE_SENSOR_PROP_MANUFACTURER,
++				   HID_CUSTOM_MAX_FEATURE_BYTES,
++				   prop->manufacturer);
  
 -	if (strlen(buf) != strlen(known_sensor_luid[0]) + 5) {
 -		hid_err(hsdev->hdev,
 -			"%s luid length not match %zu != (%zu + 5)\n", __func__,
 -			strlen(buf), strlen(known_sensor_luid[0]));
+-		return -ENODEV;
 +	return 0;
 +}
-+
 +
 +static int
 +hid_sensor_custom_get_known(struct hid_sensor_hub_device *hsdev,
@@ -290,7 +235,7 @@ index 32c2306e240d..5af8eb12d983 100644
 +
 +	ret = hid_sensor_custom_properties_get(hsdev, &prop);
 +	if (ret < 0)
- 		return -ENODEV;
++		return ret;
 +
 +	while (match->tag) {
 +		if (hid_sensor_custom_do_match(hsdev, match, &prop)) {
@@ -302,7 +247,7 @@ index 32c2306e240d..5af8eb12d983 100644
  
 -	/* get table index with luid (not matching 'LUID: ' in luid) */
 -	return get_luid_table_index(&buf[5]);
-+	return -ENODEV;
++	return -ENODATA;
  }
  
  static struct platform_device *
@@ -317,41 +262,39 @@ index 32c2306e240d..5af8eb12d983 100644
  	const char *dev_name;
  	char *c;
  
- 	/* copy real usage id */
+-	/* copy real usage id */
 -	memcpy(real_usage, known_sensor_luid[index], 4);
 +	memcpy(real_usage, match->luid, 4);
-+	real_usage[4] = '\0';
  
--	/* usage id are all lowcase */
-+	/* usage ids are all lowcase */
+ 	/* usage id are all lowcase */
  	for (c = real_usage; *c != '\0'; c++)
  		*c = tolower(*c);
  
 -	/* HID-SENSOR-INT-REAL_USAGE_ID */
 -	dev_name = kasprintf(GFP_KERNEL, "HID-SENSOR-INT-%s", real_usage);
-+	/* HID-SENSOR-tag-real_usage */
++	/* HID-SENSOR-TAG-REAL_USAGE_ID */
 +	dev_name = kasprintf(GFP_KERNEL, "HID-SENSOR-%s-%s",
 +			     match->tag, real_usage);
  	if (!dev_name)
  		return ERR_PTR(-ENOMEM);
  
-@@ -873,7 +1001,7 @@ static int hid_sensor_custom_probe(struct platform_device *pdev)
+@@ -873,7 +939,7 @@ static int hid_sensor_custom_probe(struct platform_device *pdev)
  	struct hid_sensor_custom *sensor_inst;
  	struct hid_sensor_hub_device *hsdev = pdev->dev.platform_data;
  	int ret;
 -	int index;
-+	const struct hid_sensor_custom_match *match = NULL;
++	const struct hid_sensor_custom_match *match;
  
  	sensor_inst = devm_kzalloc(&pdev->dev, sizeof(*sensor_inst),
  				   GFP_KERNEL);
-@@ -888,10 +1016,10 @@ static int hid_sensor_custom_probe(struct platform_device *pdev)
+@@ -888,10 +954,10 @@ static int hid_sensor_custom_probe(struct platform_device *pdev)
  	mutex_init(&sensor_inst->mutex);
  	platform_set_drvdata(pdev, sensor_inst);
  
 -	index = get_known_custom_sensor_index(hsdev);
 -	if (index >= 0 && index < ARRAY_SIZE(known_sensor_luid)) {
 +	ret = hid_sensor_custom_get_known(hsdev, &match);
-+	if (!ret && match) {
++	if (!ret) {
  		sensor_inst->custom_pdev =
 -			hid_sensor_register_platform_device(pdev, hsdev, index);
 +			hid_sensor_register_platform_device(pdev, hsdev, match);
@@ -371,5 +314,5 @@ index ac631159403a..13b1e65fbdcc 100644
  #define HID_USAGE_SENSOR_PROP_SENSITIVITY_ABS			0x20030F
  #define HID_USAGE_SENSOR_PROP_SENSITIVITY_RANGE_PCT		0x200310
 -- 
-2.37.2
+2.38.1
 

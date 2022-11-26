@@ -1,0 +1,50 @@
+From dde6d055295b307848cbf802f5eeb0406ccd73e5 Mon Sep 17 00:00:00 2001
+From: Philipp Jungkamp <p.jungkamp@gmx.net>
+Date: Thu, 17 Nov 2022 23:46:02 +0100
+Subject: [PATCH 4/8] HID: hid-sensor-custom: Add LISS custom sensors
+
+Add the Lenovo Intelligent Sensing Solution (LISS) custom sensors to the
+known custom sensors.
+
+Signed-off-by: Philipp Jungkamp <p.jungkamp@gmx.net>
+---
+ drivers/hid/hid-sensor-custom.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/drivers/hid/hid-sensor-custom.c b/drivers/hid/hid-sensor-custom.c
+index 734c6bde68fe..7c6e2e795753 100644
+--- a/drivers/hid/hid-sensor-custom.c
++++ b/drivers/hid/hid-sensor-custom.c
+@@ -782,6 +782,29 @@ static const struct hid_sensor_custom_match hid_sensor_custom_known_table[] = {
+ 		.luid = "020B000000000000",
+ 		.manufacturer = "INTEL",
+ 	},
++	/*
++	 * Lenovo Intelligent Sensing Solution (LISS)
++	 */
++	{	/* ambient light */
++		.tag = "LISS",
++		.luid = "0041010200000082",
++		.model = "STK3X3X Sensor",
++		.manufacturer = "Vendor 258",
++		.check_dmi = true,
++		.dmi.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
++		}
++	},
++	{	/* human presence */
++		.tag = "LISS",
++		.luid = "0226000171AC0081",
++		.model = "VL53L1_HOD Sensor",
++		.manufacturer = "ST_MICRO",
++		.check_dmi = true,
++		.dmi.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
++		}
++	},
+ 	{}
+ };
+ 
+-- 
+2.38.1
+
