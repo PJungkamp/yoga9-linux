@@ -35,7 +35,7 @@ I found solutions for most of them:
 
 ## Extra Features
 
-Digging into the ACPI DSDT revealed some more features which are available via Lenovo Vantage on Windows.
+Digging into the ACPI DSDT and Intel ISH custom sensors revealed some more features which are sometimes only available via Lenovo Vantage on Windows.
 
 - The Laptop has a USB-C quick-charge setting which is controlled by an ACPI function. 
 The Bugzilla has an [issue](https://bugzilla.kernel.org/show_bug.cgi?id=216176) for this.
@@ -44,6 +44,14 @@ The usage mode indicates whether the convertible is used as a Laptop, Tent, Tabl
 The [0007-Add-IdeaPad-Usage-Mode-driver.patch](kernel-patches/0007-Add-IdeaPad-Usage-Mode-driver.patch) can emit a `SW_TABLET_MODE` switch event to automatically enable the on-screen-keyboard and screen-auto-rotation in some desktop environments (e.g.
 KDE Plasma & GNOME).
 This should preferably be fixed in `iio-sensor-proxy` using the hinge sensor data.
+- There are a lot of special sensors built in next to the camera. These can be used to get the proximity from the screen and ambient light brightness.
+Lenovo calls this collection of sensors 'Lenovo Intelligent Sensing' and exposes them as 'custom' Intel ISH HID sensors to the system.
+The ambient light sensor above the keyboard is also responsible fot the automatic keyboard backlight setting.
+It does not seem to do anything in Windows with regard to automatic screen brightness.
+I introduced some patches to make the HPD (Human Presence Detection) and ALS work.
+  - infrastructure for custom sensors: [0003-HID-hid-sensor-custom-Allow-more-custom-iio-sensors.patch](kernel-patches/0003-HID-hid-sensor-custom-Allow-more-custom-iio-sensors.patch)
+  - ambient light: [0005-IIO-hid-sensor-als-Use-generic-usage.patch](kernel-patches/0005-IIO-hid-sensor-als-Use-generic-usage.patch)
+  - proximity/HPD: [0006-IIO-hid-sensor-prox-Use-generic-usage.patch](kernel-patches/0006-IIO-hid-sensor-prox-Use-generic-usage.patch)
 - The ACPI can also control the keyboard backlight setting (Off/Low/High/Auto) but I have not written a patch for that yet.
 
 ## Bug Reports
